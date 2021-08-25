@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
+
+
         try{
 
         }catch (Exception e){
@@ -95,33 +97,57 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if(!password.isEmpty())
                     {
-                        if(!comPassword.isEmpty())
+                        if (!(password.length() < 7))
                         {
-                            if (password.equals(comPassword))
+                            if(!comPassword.isEmpty())
                             {
-                                mAuth.createUserWithEmailAndPassword(email,password)
-                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NotNull Task<AuthResult> task) {
-                                                Toast.makeText(MainActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                                                finish();
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NotNull Exception e) {
-                                        Toast.makeText(MainActivity.this, "Registration Error !!!", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                if (password.equals(comPassword))
+                                {
+                                    mAuth.createUserWithEmailAndPassword(email,password)
+                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NotNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful())
+                                                    {
+                                                        Toast.makeText(MainActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                                                        finish();
+                                                    }else
+                                                        {
+                                                            Toast.makeText(MainActivity.this, "Registration Error !!!", Toast.LENGTH_SHORT).show();
+                                                        }
+
+                                                }
+                                            });
+
+//                                    mAuth.createUserWithEmailAndPassword(email,password)
+//                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                                                @Override
+//                                                public void onComplete(@NotNull Task<AuthResult> task) {
+//                                                    Toast.makeText(MainActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
+//                                                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+//                                                    finish();
+//                                                }
+//                                            }).addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NotNull Exception e) {
+//                                            Toast.makeText(MainActivity.this, "Registration Error !!!", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+                                }else
+                                {
+                                    txtComPass.setError("Passwords are not matched");
+                                }
+
                             }else
                             {
-                                txtComPass.setError("Passwords are not matched");
+                                txtComPass.setError("Empty Fields Are Not Allowed");
+                            }
+                        }else
+                            {
+                                txtPass.setError("Passwords length should be >=7 !");
                             }
 
-                        }else
-                        {
-                            txtComPass.setError("Empty Fields Are Not Allowed");
-                        }
 
                     }else
                     {

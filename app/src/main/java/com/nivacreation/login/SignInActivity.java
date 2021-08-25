@@ -1,5 +1,6 @@
 package com.nivacreation.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,12 +11,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.jetbrains.annotations.NotNull;
 
 public class SignInActivity extends AppCompatActivity {
 
     private TextView txtSignUp;
     private EditText edtEmailSignIn, edtPasswordSignIn;
     private Button btnLogin;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +39,9 @@ public class SignInActivity extends AppCompatActivity {
         edtEmailSignIn = findViewById(R.id.emailSignIn);
         edtPasswordSignIn = findViewById(R.id.passwordSignIn);
         btnLogin = findViewById(R.id.btnLogIn);
+
+        FirebaseApp.initializeApp(this);
+        mAuth = FirebaseAuth.getInstance();
 
         txtSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +67,43 @@ public class SignInActivity extends AppCompatActivity {
         {
             if (!password.isEmpty())
             {
-                startActivity(new Intent(SignInActivity.this,HomeActivity.class));
+                if (!(password.length() < 7))
+                {
+                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                            if (task.isSuccessful())
+                            {
+                                Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                                finish();
+                            }else
+                                {
+                                    Toast.makeText(SignInActivity.this, "Login Error !!!", Toast.LENGTH_SHORT).show();
+                                }
+
+                        }
+                    });
+
+//                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+//                            Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+//                            finish();
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NotNull Exception e) {
+//                            Toast.makeText(SignInActivity.this, "Login Error !!!", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+
+                }else
+                    {
+                        edtPasswordSignIn.setError("tPasswords length should be >=7 !");
+                    }
+
             }else
                 {
                     edtPasswordSignIn.setError("Empty Fields Are Not Allowed !");
