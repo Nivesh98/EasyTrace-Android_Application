@@ -1,7 +1,6 @@
 package com.nivacreation.login;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,26 +10,42 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "TAG";
     private EditText txtEmailSign, txtPass, txtComPass , txtFirstName, txtlastName;
     private TextView txtButton; //,txtSaPass, txtSaConPass;
     private Button btnSignUp;
 
+    private RadioGroup radioGroupUsers;
+    private RadioButton radioButtonUsers;
+
     private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+
+    String UserNameRadio;
+    String userID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +62,21 @@ public class MainActivity extends AppCompatActivity {
         txtFirstName = findViewById(R.id.firstName);
         txtlastName = findViewById(R.id.lastName);
 
+        radioGroupUsers = findViewById(R.id.rgUsers);
+
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
 
-        try{
 
-        }catch (Exception e){
-            Log.i("12345", "get instance error "+e);
-        }
+        radioGroupUsers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioButtonUsers = findViewById(checkedId);
+                Toast.makeText(MainActivity.this, radioButtonUsers.getText().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
 //        String sPass = txtPass.getText().toString();
 //        String sCoPass = txtComPass.getText().toString();
 //        txtSaPass.setText(sPass);
@@ -79,15 +100,57 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void findRadioChecked(int checkIdRadio) {
+        switch (checkIdRadio)
+        {
+            case  R.id.rdPassenger :
+                radioButtonUsers = findViewById(R.id.rdPassenger);
+                UserNameRadio = radioButtonUsers.getText().toString();
+                break;
+            case R.id.rdAdmin:
+                radioButtonUsers = findViewById(R.id.rdAdmin);
+                UserNameRadio = radioButtonUsers.getText().toString();
+                break;
+            case R.id.rdDriver:
+                radioButtonUsers = findViewById(R.id.rdDriver);
+                UserNameRadio = radioButtonUsers.getText().toString();
+                break;
+        }
+
+
+    }
+
+    private void userTypeGoActivity(String userType){
+
+        switch (userType)
+        {
+            case "Passenger":
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                finish();
+                break;
+            case "Driver":
+                startActivity(new Intent(MainActivity.this, Driver.class));
+                finish();
+                break;
+            case "Admin":
+                startActivity(new Intent(MainActivity.this, Admin.class));
+                finish();
+                break;
+        }
+    }
 
     private void createUser()
     {
+        int checkIdRadio = radioGroupUsers.getCheckedRadioButtonId();
 
-        String email = txtEmailSign.getText().toString();
-        String password = txtPass.getText().toString();
-        String comPassword = txtComPass.getText().toString();
+        findRadioChecked(checkIdRadio);
+
+        String email = txtEmailSign.getText().toString().trim();
+        String password = txtPass.getText().toString().trim();
+        String comPassword = txtComPass.getText().toString().trim();
         String firstName = txtFirstName.getText().toString();
         String lastName = txtlastName.getText().toString();
+        String userType = UserNameRadio;
 
         if (!firstName.isEmpty())
         {
@@ -110,7 +173,22 @@ public class MainActivity extends AppCompatActivity {
                                                     if (task.isSuccessful())
                                                     {
                                                         Toast.makeText(MainActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                                                        userID = mAuth.getCurrentUser().getUid();
+                                                        DocumentReference documentReference = fStore.collection("Users").document(userID);
+                                                        Map<String,Object> user = new HashMap<>();
+                                                        user.put("First Name",firstName);
+                                                        user.put("Last Name",lastName);
+                                                        user.put("email",email);
+                                                        user.put("User Type", userType);
+
+                                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Log.d(TAG,"onSuccess: User profile is created for "+ userID);
+                                                            }
+                                                        });
+                                                        // check whether what type of user is
+                                                        userTypeGoActivity(userType);
                                                         finish();
                                                     }else
                                                         {

@@ -60,8 +60,8 @@ public class SignInActivity extends AppCompatActivity {
 
     private void checkValidation()
     {
-        String email = edtEmailSignIn.getText().toString();
-        String password = edtPasswordSignIn.getText().toString();
+        String email = edtEmailSignIn.getText().toString().trim();
+        String password = edtPasswordSignIn.getText().toString().trim();
 
         if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {

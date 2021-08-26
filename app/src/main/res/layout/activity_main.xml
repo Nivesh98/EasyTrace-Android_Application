@@ -22,6 +22,61 @@
             app:srcCompat="@drawable/easy_trace"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rgUsers"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Passenger"
+                    android:id="@+id/rdPassenger"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_color"
+                    android:elevation="4dp"
+                    android:textStyle="bold"
+
+                    android:padding="5dp"
+                    android:layout_marginRight="20dp"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Driver"
+                    android:id="@+id/rdDriver"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_color"
+                    android:elevation="4dp"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    android:layout_marginRight="20dp"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Admin"
+                    android:id="@+id/rdAdmin"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_selector"
+                    android:textColor="@drawable/text_color"
+                    android:elevation="4dp"
+                    android:textStyle="bold"
+                    android:padding="5dp"
+                    />
+            </RadioGroup>
+
+
+        </LinearLayout>
         <EditText
             android:id="@+id/firstName"
             android:layout_width="wrap_content"
@@ -72,7 +127,7 @@
             android:layout_height="56dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/comfirm_password"
             android:hint="Confirm password"
             android:inputType="textPassword"
@@ -95,14 +150,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:text="Already Registered?" />
+                android:text="Already Registered?"
+                />
 
             <TextView
                 android:id="@+id/txtButtonSignUp"
@@ -111,7 +168,8 @@
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:text=" Sign In"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+               />
 
         </LinearLayout>
 
