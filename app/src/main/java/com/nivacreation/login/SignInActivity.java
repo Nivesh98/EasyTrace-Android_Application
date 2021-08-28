@@ -13,6 +13,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class SignInActivity extends AppCompatActivity {
     private TextView txtSignUp, txtForgetPass;
     private EditText edtEmailSignIn, edtPasswordSignIn;
     private Button btnLogin;
+    private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
@@ -52,12 +54,13 @@ public class SignInActivity extends AppCompatActivity {
         edtEmailSignIn = findViewById(R.id.emailSignIn);
         edtPasswordSignIn = findViewById(R.id.passwordSignIn);
         btnLogin = findViewById(R.id.btnLogIn);
+        progressBar = findViewById(R.id.progressBar);
 
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-       userId = mAuth.getCurrentUser().getUid();
+
 
         txtForgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,28 +118,32 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void findUserType()
-        {
+    private void findUserType() {
+            userId = mAuth.getCurrentUser().getUid();
 
             DocumentReference documentReference = fStore.collection("Users").document(userId);
             documentReference.addSnapshotListener(SignInActivity.this, new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
                     verifyUserType = value.getString("User Type");
-                    switch (verifyUserType)
-                    {
+                    switch (verifyUserType) {
                         case "Passenger":
-                            Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                            //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                           // startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                            Intent goPassengerActivity = new Intent(SignInActivity.this,HomeActivity.class);
+                            goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                            startActivity(goPassengerActivity);
                             finish();
                             break;
                         case "Driver":
-                            Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this, Driver.class));
                             finish();
                             break;
                         case "Admin":
-                            Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this, Admin.class));
                             finish();
                             break;
@@ -146,27 +153,28 @@ public class SignInActivity extends AppCompatActivity {
             });
         }
 
-    private void checkValidation()
-    {
+    private void checkValidation() {
         String email = edtEmailSignIn.getText().toString().trim();
         String password = edtPasswordSignIn.getText().toString().trim();
 
 
-        if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
-            if (!password.isEmpty())
-            {
+        if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (!password.isEmpty()) {
                 if (!(password.length() < 7))
                 {
+                    progressBar.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                             if (task.isSuccessful())
                             {
+
                                 findUserType();
+                                Toast.makeText(SignInActivity.this, "Login Successfully !!!", Toast.LENGTH_SHORT).show();
                             }else
                                 {
                                     Toast.makeText(SignInActivity.this, "Login Error !!!", Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
                                 }
                         }
                     });

@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtEmailSign, txtPass, txtComPass , txtFirstName, txtlastName;
     private TextView txtButton; //,txtSaPass, txtSaConPass;
     private Button btnSignUp;
+    private ProgressBar progressBar;
 
     private RadioGroup radioGroupUsers;
     private RadioButton radioButtonUsers;
@@ -57,10 +59,9 @@ public class MainActivity extends AppCompatActivity {
         txtComPass = findViewById(R.id.confirmPassword);
         txtButton = findViewById(R.id.txtButtonSignUp);
         btnSignUp = findViewById(R.id.btnSignup);
-        //txtSaPass = findViewById(R.id.sample_password);
-        //txtSaConPass = findViewById(R.id.sample_confirmPas);
         txtFirstName = findViewById(R.id.firstName);
         txtlastName = findViewById(R.id.lastName);
+        progressBar = findViewById(R.id.progressBar);
 
         radioGroupUsers = findViewById(R.id.rgUsers);
 
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 if (password.equals(comPassword))
                                 {
+                                    progressBar.setVisibility(View.VISIBLE);
                                     mAuth.createUserWithEmailAndPassword(email,password)
                                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                 @Override
@@ -193,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                                                     }else
                                                         {
                                                             Toast.makeText(MainActivity.this, "Registration Error !!!", Toast.LENGTH_SHORT).show();
+                                                            progressBar.setVisibility(View.GONE);
                                                         }
 
                                                 }

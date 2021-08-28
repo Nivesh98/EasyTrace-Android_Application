@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class HomeActivity extends AppCompatActivity {
 
-    Button qrBtn, findBusBtn;
+    Button qrBtn, findBusBtn, logOutBtn;
     public static TextView valueTxt;
     TextView userFullNameTxt, userEmailTxt, userTypeTxt;
     FirebaseAuth fAuth;
@@ -33,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
 
         qrBtn = findViewById(R.id.btnQR);
         findBusBtn = findViewById(R.id.btnFindBus);
+        logOutBtn = findViewById(R.id.logout);
 
         userEmailTxt = findViewById(R.id.txtUserEmail);
         userFullNameTxt = findViewById(R.id.txtUserFullName);
@@ -43,6 +44,29 @@ public class HomeActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fAuth.signOut();
+                Intent signInActivity = new Intent(HomeActivity.this, SignInActivity.class);
+                signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(signInActivity);
+                finish();
+            }
+        });
+
+       userDetails();
+
+       qrBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),qrScanner.class));
+            }
+        });
+
+
+    }
+    public void userDetails(){
         userId = fAuth.getCurrentUser().getUid();
 
         DocumentReference documentReference = fStore.collection("Users").document(userId);
@@ -57,11 +81,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        qrBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),qrScanner.class));
-            }
-        });
     }
+//    public void logOutOnClick(View view) {
+//        fAuth.signOut();
+//        startActivity(new Intent(getApplicationContext(),SignInActivity.class));
+//        finish();
+//    }
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 }
