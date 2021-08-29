@@ -12,13 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
-        <activity android:name=".Admin"></activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".Admin" />
         <activity android:name=".Driver" />
         <activity android:name=".qrScanner" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity" />
         <activity
-            android:name=".SignInActivity"
+
+            android:name=".splashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
