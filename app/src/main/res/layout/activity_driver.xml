@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Driver">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:id="@+id/toolBar_logout"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/txtUserFullName"
         android:layout_width="wrap_content"

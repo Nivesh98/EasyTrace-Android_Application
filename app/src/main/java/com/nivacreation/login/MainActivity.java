@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        if (mAuth.getCurrentUser() != null){
+            userTypeGoActivity(UserNameRadio);
+            finish();
+        }
+
 
 
         radioGroupUsers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
