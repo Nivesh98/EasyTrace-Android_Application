@@ -60,7 +60,11 @@ public class SignInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-
+        //This is a newly added. this is an example.
+        if (mAuth.getCurrentUser() != null){
+            findUserType();
+            finish();
+        }
 
         txtForgetPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,38 +123,54 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void findUserType() {
+
             userId = mAuth.getCurrentUser().getUid();
 
             DocumentReference documentReference = fStore.collection("Users").document(userId);
             documentReference.addSnapshotListener(SignInActivity.this, new EventListener<DocumentSnapshot>() {
                 @Override
                 public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                    verifyUserType = value.getString("User Type");
-                    switch (verifyUserType) {
-                        case "Passenger":
-                            //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
-                           // startActivity(new Intent(SignInActivity.this, HomeActivity.class));
-                            Intent goPassengerActivity = new Intent(SignInActivity.this,HomeActivity.class);
-                            goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                            startActivity(goPassengerActivity);
-                            finish();
-                            break;
-                        case "Driver":
-                            //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this, Driver.class));
-                            finish();
-                            break;
-                        case "Admin":
-                            //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this, Admin.class));
-                            finish();
-                            break;
+                    if (value != null && value.exists()) {
+                        verifyUserType = value.getString("User Type");
+                        switch (verifyUserType) {
+                            case "Passenger":
+                                //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                // startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                                Intent goPassengerActivity = new Intent(SignInActivity.this, HomeActivity.class);
+                                goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+                                startActivity(goPassengerActivity);
+                                finish();
+                                break;
+                            case "Driver":
+                                //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                //startActivity(new Intent(SignInActivity.this, Driver.class));
+                                Intent goPassengerActivity2 = new Intent(SignInActivity.this, Driver.class);
+                                goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                startActivity(goPassengerActivity2);
+                                finish();
+                                break;
+                            case "Admin":
+                                //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignInActivity.this, Admin.class));
+                                Intent goPassengerActivity3 = new Intent(SignInActivity.this, Admin.class);
+                                goPassengerActivity3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                goPassengerActivity3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                startActivity(goPassengerActivity3);
+                                finish();
+                                break;
+
+                        }
                     }
                 }
             });
+
+
         }
 
     private void checkValidation() {

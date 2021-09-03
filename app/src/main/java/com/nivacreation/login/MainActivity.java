@@ -1,6 +1,7 @@
 package com.nivacreation.login;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,7 +24,10 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
 
     String UserNameRadio;
-    String userID;
+    String userID, userIdLogin;
+    public String verifyUserType;
 
 
     @Override
@@ -69,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        //This is a newly added. this is an example.
         if (mAuth.getCurrentUser() != null){
-            userTypeGoActivity(UserNameRadio);
+            findUserType();
             finish();
         }
 
@@ -273,6 +279,41 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
+    }
+
+    private void findUserType() {
+        userIdLogin = mAuth.getCurrentUser().getUid();
+
+        DocumentReference documentReference = fStore.collection("Users").document(userIdLogin);
+        documentReference.addSnapshotListener(MainActivity.this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                verifyUserType = value.getString("User Type");
+                switch (verifyUserType) {
+                    case "Passenger":
+                        //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                        // startActivity(new Intent(SignInActivity.this, HomeActivity.class));
+                        Intent goPassengerActivity = new Intent(MainActivity.this,HomeActivity.class);
+                        goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        startActivity(goPassengerActivity);
+                        finish();
+                        break;
+                    case "Driver":
+                        //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Driver.class));
+                        finish();
+                        break;
+                    case "Admin":
+                        //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Admin.class));
+                        finish();
+                        break;
+
+                }
+            }
+        });
     }
 
 }

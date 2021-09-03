@@ -80,7 +80,6 @@ public class HomeActivity extends AppCompatActivity {
 
         FirebaseUser user = fAuth.getCurrentUser();
         if (fAuth.getCurrentUser().getUid() != null){
-            if (user.isEmailVerified()){
 
                 userId = fAuth.getCurrentUser().getUid();
 
@@ -88,19 +87,19 @@ public class HomeActivity extends AppCompatActivity {
                 documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                        userEmailTxt.setText(value.getString("email"));
-                        userFullNameTxt.setText(value.getString("First Name")+" "+value.getString("Last Name"));
-                        //userTypeTxt.setText(value.getString("User Type"));
-                        vui = value.getString("User Type");
-                        userTypeTxt.setText(vui);
+
+                        if (value != null && value.exists()) {
+
+                            userEmailTxt.setText(value.getString("email"));
+                            userFullNameTxt.setText(value.getString("First Name") + " " + value.getString("Last Name"));
+                            //userTypeTxt.setText(value.getString("User Type"));
+                            vui = value.getString("User Type");
+                            userTypeTxt.setText(vui);
+                        }
 
                     }
                 });
             }
-
-        }
-
-
     }
 
     @Override
@@ -116,8 +115,8 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menuLogout:
                 FirebaseAuth.getInstance().signOut();
-                finish();
                 startActivity(new Intent(this,SignInActivity.class));
+                finish();
         }
         return true;
     }
