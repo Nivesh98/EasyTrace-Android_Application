@@ -5,12 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -21,13 +23,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class Driver extends AppCompatActivity {
     TextView userFullNameTxt, userEmailTxt, userTypeTxt;
     Button logOutBtn;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    String userId;
+    String userId, sampleQRuserID;
     Toolbar toolbar;
 
     @Override
@@ -44,6 +50,25 @@ public class Driver extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+        //QR Genareter im below
+
+        sampleQRuserID = fAuth.getCurrentUser().getUid();
+        ImageView barcode = findViewById(R.id.bar_code);
+        String data_in_code = "Hello Bar code Data";
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+
+        HomeActivity homeActivity = new HomeActivity();
+
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(sampleQRuserID, BarcodeFormat.QR_CODE,200,200);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            barcode.setImageBitmap(bitmap);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //QR genarater inabove
 
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
