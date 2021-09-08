@@ -8,6 +8,7 @@ android {
     buildToolsVersion '30.0.2'
 
     defaultConfig {
+        //if we want to application id name as .Easy_Trace instead .login because we changed app name.
         applicationId "com.nivacreation.login"
         minSdkVersion 21
         targetSdkVersion 30
@@ -58,5 +59,15 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //material design
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
+
+    // Rounded Image View
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Navigation Component
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-rc03'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-rc03'
 
 }

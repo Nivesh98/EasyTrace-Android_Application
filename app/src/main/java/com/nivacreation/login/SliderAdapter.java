@@ -27,6 +27,7 @@ public class SliderAdapter extends PagerAdapter {
     public  String[] slide_heading = {"Slide1","Slide2","Slide3"};
     public String[] slide_descript = { "dkfjdfjkj,kdjfkdjfkdfjldjfldjfldfjdkfjkd dfjdkj fjkdj djfkd kjfd ffdkjflsjdk","dkfjdfjkj,kdjfkdjfkdfjldjfldjfldfjdkfjkd dfjdkj fjkdj djfkd kjfd ffdkjflsjdk","dkfjdfjkj,kdjfkdjfkdfjldjfldjfldfjdkfjkd dfjdkj fjkdj djfkd kjfd ffdkjflsjdk"};
 
+
     @Override
     public int getCount() {
 
@@ -45,7 +46,7 @@ public class SliderAdapter extends PagerAdapter {
 
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_layout,container,false);
-
+        
         ImageView slideImageView = (ImageView) view.findViewById(R.id.slideImage);
         TextView slideHeading = (TextView) view.findViewById(R.id.slideHeading);
         TextView slideDescription = (TextView) view.findViewById(R.id.slideDescription);

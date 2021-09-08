@@ -79,6 +79,13 @@
             android:id="@+id/logout"
             />
 
+        <Button
+            android:id="@+id/naviBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="navi"
+            android:layout_gravity="center"/>
+
     </LinearLayout>
 
 

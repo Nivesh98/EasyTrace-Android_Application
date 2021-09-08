@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class HomeActivity extends AppCompatActivity {
 
-    Button qrBtn, findBusBtn, logOutBtn;
+    Button qrBtn, findBusBtn, logOutBtn, naviBtn;
     public static TextView valueTxt;
     TextView userFullNameTxt, userEmailTxt, userTypeTxt;
     FirebaseAuth fAuth;
@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         qrBtn = findViewById(R.id.btnQR);
         findBusBtn = findViewById(R.id.btnFindBus);
         logOutBtn = findViewById(R.id.logout);
+        naviBtn = findViewById(R.id.naviBtn);
 
         userEmailTxt = findViewById(R.id.txtUserEmail);
         userFullNameTxt = findViewById(R.id.txtUserFullName);
@@ -57,6 +58,16 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
        userDetails();
+
+       naviBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent signInActivity = new Intent(HomeActivity.this, Passenger_Navigation.class);
+               signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+               startActivity(signInActivity);
+               finish();
+           }
+       });
 
        qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override

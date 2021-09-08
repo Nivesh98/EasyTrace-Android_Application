@@ -74,6 +74,7 @@ public class Welcome extends AppCompatActivity {
 
                     slideViewPager.setCurrentItem(mCurrentPage + 1);
 
+
                 }
             }
         });

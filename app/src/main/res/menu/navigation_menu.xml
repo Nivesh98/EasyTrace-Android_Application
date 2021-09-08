@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_profile"
+        android:title="@string/profile"/>
+
+    <item
+        android:id="@+id/navigation_notification"
+        android:title="@string/notification"/>
+
+    <item
+        android:id="@+id/navigation_inbox"
+        android:title="@string/inbox"/>
+    <item
+        android:title="@string/others">
+        <menu>
+            <item
+                android:id="@+id/navigation_settings"
+                android:title="@string/settings"/>
+            <item
+                android:id="@+id/navigation_support"
+                android:title="@string/support"/>
+            <item
+                android:id="@+id/navigation_aboutUs"
+                android:title="@string/about_us"/>
+        </menu>
+    </item>
+</menu>
