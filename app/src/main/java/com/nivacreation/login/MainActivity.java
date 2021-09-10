@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         //This is a newly added. this is an example.
         if (mAuth.getCurrentUser() != null){
             findUserType();
-            finish();
+//            finish();
         }
 
 
@@ -107,7 +107,13 @@ public class MainActivity extends AppCompatActivity {
         txtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+//                startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                Intent goPassengerActivity2 = new Intent(MainActivity.this, SignInActivity.class);
+                goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(goPassengerActivity2);
+                finish();
             }
         });
     }
@@ -119,10 +125,10 @@ public class MainActivity extends AppCompatActivity {
                 radioButtonUsers = findViewById(R.id.rdPassenger);
                 UserNameRadio = radioButtonUsers.getText().toString();
                 break;
-            case R.id.rdAdmin:
-                radioButtonUsers = findViewById(R.id.rdAdmin);
-                UserNameRadio = radioButtonUsers.getText().toString();
-                break;
+//            case R.id.rdAdmin:
+//                radioButtonUsers = findViewById(R.id.rdAdmin);
+//                UserNameRadio = radioButtonUsers.getText().toString();
+//                break;
             case R.id.rdDriver:
                 radioButtonUsers = findViewById(R.id.rdDriver);
                 UserNameRadio = radioButtonUsers.getText().toString();

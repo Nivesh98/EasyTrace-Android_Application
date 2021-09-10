@@ -62,7 +62,7 @@ public class SignInActivity extends AppCompatActivity {
         //This is a newly added. this is an example.
         if (mAuth.getCurrentUser() != null){
             findUserType();
-            finish();
+//            finish();
         }
 
         txtForgetPass.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +110,12 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignInActivity.this, MainActivity.class));
+//                Intent goPassengerActivity2 = new Intent(SignInActivity.this, MainActivity.class);
+//                goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                startActivity(goPassengerActivity2);
+//                finish();
             }
         });
 
@@ -136,7 +142,7 @@ public class SignInActivity extends AppCompatActivity {
                             case "Passenger":
                                 //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
                                 // startActivity(new Intent(SignInActivity.this, HomeActivity.class));
-                                Intent goPassengerActivity = new Intent(SignInActivity.this, HomeActivity.class);
+                                Intent goPassengerActivity = new Intent(SignInActivity.this, Passenger_Navigation.class);
                                 goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 goPassengerActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

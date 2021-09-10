@@ -21,6 +21,7 @@
         <activity android:name=".Driver" />
         <activity android:name=".qrScanner" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".layout_header"/>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".splashScreen"

@@ -34,9 +34,10 @@ public class Welcome extends AppCompatActivity {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signInActivity = new Intent(Welcome.this, SignInActivity.class);
-                signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(signInActivity);
+//                Intent signInActivity = new Intent(Welcome.this, SignInActivity.class);
+//                signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(signInActivity);
+                startActivity(new Intent(Welcome.this, SignInActivity.class));
                 finish();
             }
         });
@@ -95,13 +96,13 @@ public class Welcome extends AppCompatActivity {
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.transparentColorWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.purple_500));
 
             dotLayout.addView(mDots[i]);
         }
 
         if (mDots.length>0){
-            mDots[position1].setTextColor(getResources().getColor(R.color.white));
+            mDots[position1].setTextColor(getResources().getColor(R.color.purple_700));
         }
     }
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {

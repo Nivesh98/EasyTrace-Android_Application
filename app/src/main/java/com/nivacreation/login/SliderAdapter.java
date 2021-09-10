@@ -23,15 +23,16 @@ public class SliderAdapter extends PagerAdapter {
         this.context = context;
     }
 
-    public int[] slide_images = {R.drawable.bus_png,R.drawable.wallet,R.drawable.pointer};
-    public  String[] slide_heading = {"Slide1","Slide2","Slide3"};
-    public String[] slide_descript = { "dkfjdfjkj,kdjfkdjfkdfjldjfldjfldfjdkfjkd dfjdkj fjkdj djfkd kjfd ffdkjflsjdk","dkfjdfjkj,kdjfkdjfkdfjldjfldjfldfjdkfjkd dfjdkj fjkdj djfkd kjfd ffdkjflsjdk","dkfjdfjkj,kdjfkdjfkdfjldjfldjfldfjdkfjkd dfjdkj fjkdj djfkd kjfd ffdkjflsjdk"};
+    public int[] slide_images = {R.drawable.wallet_background,R.drawable.bus_background,R.drawable.pointer_background};
+//    public  int[] slide_heading = {R.drawable.bus_heaser,R.drawable.wallet_header,R.drawable.pointer_header};
+//    public int[] slide_descript = { R.drawable.bus_description,R.drawable.wallet_description,R.drawable.pointer_description};
+//    public int[] slide_background = {R.drawable.background_first,R.drawable.background_second,R.drawable.background_third};
 
 
     @Override
     public int getCount() {
 
-        return slide_heading.length;
+        return slide_images.length;
     }
 
     @Override
@@ -46,14 +47,16 @@ public class SliderAdapter extends PagerAdapter {
 
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_layout,container,false);
-        
-        ImageView slideImageView = (ImageView) view.findViewById(R.id.slideImage);
-        TextView slideHeading = (TextView) view.findViewById(R.id.slideHeading);
-        TextView slideDescription = (TextView) view.findViewById(R.id.slideDescription);
 
+//        RelativeLayout slideBackground = (RelativeLayout) view.findViewById(R.id.slideBackground);
+        ImageView slideImageView = (ImageView) view.findViewById(R.id.slideImage);
+//        ImageView slideHeading = (ImageView) view.findViewById(R.id.slideHeading);
+//        ImageView slideDescription = (ImageView) view.findViewById(R.id.slideDescription);
+
+//        slideBackground.setBackground(slide_background[position]);
         slideImageView.setImageResource(slide_images[position]);
-        slideHeading.setText(slide_heading[position]);
-        slideDescription.setText(slide_descript[position]);
+//        slideHeading.setImageResource(slide_heading[position]);
+//        slideDescription.setImageResource(slide_descript[position]);
 
         container.addView(view);
 

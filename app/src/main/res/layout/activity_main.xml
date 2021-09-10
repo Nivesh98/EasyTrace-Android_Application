@@ -61,18 +61,7 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_marginRight="20dp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Admin"
-                    android:id="@+id/rdAdmin"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_selector"
-                    android:textColor="@drawable/text_color"
-                    android:elevation="4dp"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    />
+
             </RadioGroup>
 
 
@@ -167,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:text=" Sign In"
+                android:text=" Login"
                 android:textStyle="bold|italic"
                />
 

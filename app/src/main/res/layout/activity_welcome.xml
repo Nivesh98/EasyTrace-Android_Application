@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#9AEBFE"
     tools:context=".Welcome">
 
     <LinearLayout
@@ -19,10 +19,15 @@
         >
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/skipButton"
+            android:layout_width="93dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/skip_button"
             android:text="SKIP"
-            android:id="@+id/skipButton"/>
+            android:textColor="#1F1069"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -34,9 +39,9 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="39dp"
+        android:layout_marginBottom="40dp"
         tools:ignore="UnknownId">
 
     </androidx.viewpager.widget.ViewPager>
@@ -57,27 +62,29 @@
     <Button
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="-7dp"
         android:layout_marginBottom="-5dp"
         android:background="@android:drawable/divider_horizontal_bright"
         android:text="BACK"
-        android:visibility="invisible"
-        android:textColor="@color/white"/>
+        android:textColor="#1F1069"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/nextBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
         android:layout_marginEnd="-3dp"
         android:layout_marginBottom="0dp"
         android:background="?attr/actionBarDivider"
-        android:text="Next" />
+        android:text="Next"
+        android:textColor="#1F1069"
+        android:textStyle="bold" />
 
 
 

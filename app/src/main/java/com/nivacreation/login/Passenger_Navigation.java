@@ -1,16 +1,22 @@
 package com.nivacreation.login;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import org.jetbrains.annotations.NotNull;
 
 public class Passenger_Navigation extends AppCompatActivity {
 
@@ -34,5 +40,13 @@ public class Passenger_Navigation extends AppCompatActivity {
 
         NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        final TextView textTitle = findViewById(R.id.textTitle);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull @NotNull NavController controller, @NonNull @NotNull NavDestination destination, @Nullable @org.jetbrains.annotations.Nullable Bundle arguments) {
+                textTitle.setText(destination.getLabel());
+            }
+        });
     }
 }
