@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         //This is a newly added. this is an example.
         if (mAuth.getCurrentUser() != null){
             findUserType();
-//            finish();
+            finish();
         }
 
 

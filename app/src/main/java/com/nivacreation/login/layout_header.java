@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +49,7 @@ public class layout_header extends AppCompatActivity{
 
 //        Intent intent = getIntent();
 //        String s = intent.getStringExtra("key");
+//        Toast.makeText(this,"this is complete" + s,Toast.LENGTH_SHORT).show();
 //        name.setText(s);
 
     }
