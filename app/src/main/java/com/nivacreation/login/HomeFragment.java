@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -121,9 +122,10 @@ public class HomeFragment extends Fragment {
                         //userTypeTxt.setText(value.getString("User Type"));
                         vui = value.getString("User Type");
                         userTypeTxt.setText(vui);
-                        String name = value.getString("First Name") + " " + value.getString("Last Name");
-                        Intent intent = new Intent(getActivity(),layout_header.class);
-                        intent.putExtra("key",name);
+
+//                        String name = value.getString("First Name") + " " + value.getString("Last Name");
+//                        Intent intent = new Intent(getActivity(),layout_header.class);
+//                        intent.putExtra("key",name);
 //                        Toast.makeText(getActivity(),"this is complete"  + name,Toast.LENGTH_LONG).show();
 //                        startActivity(intent);
 

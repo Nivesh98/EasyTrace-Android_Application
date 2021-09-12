@@ -99,33 +99,51 @@
             android:inputType="textEmailAddress"
             android:paddingLeft="60dp" />
 
-        <EditText
-            android:id="@+id/passwordSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/password"
-            android:hint="password"
-            android:inputType="textPassword"
-            android:paddingLeft="60dp" />
 
-        <EditText
-            android:id="@+id/confirmPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/comfirm_password"
-            android:hint="Confirm password"
-            android:inputType="textPassword"
-            android:paddingLeft="60dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            app:passwordToggleTint="#00ff99">
+
+            <EditText
+                android:id="@+id/passwordSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/password"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:paddingLeft="60dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            app:passwordToggleTint="#00ff99">
+            <EditText
+                android:id="@+id/confirmPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/comfirm_password"
+                android:hint="Confirm password"
+                android:inputType="textPassword"
+                android:paddingLeft="60dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btnSignup"
-            android:layout_width="262dp"
-            android:layout_height="66dp"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
