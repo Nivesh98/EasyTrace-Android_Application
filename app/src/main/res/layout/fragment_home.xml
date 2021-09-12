@@ -22,13 +22,24 @@
             android:text="@string/home"
             android:textSize="20sp"
             />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageProfile"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/nivesh"
+            android:clickable="true"
+            app:riv_oval="true"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Full name"
             android:id="@+id/txtUserFullName"
             android:layout_gravity="center"
-            android:layout_marginTop="150dp"/>
+            android:layout_marginTop="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

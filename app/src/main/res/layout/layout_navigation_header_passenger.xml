@@ -14,6 +14,7 @@
         android:id="@+id/imageProfile"
         android:scaleType="centerCrop"
         android:src="@drawable/nivesh"
+        android:clickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true"/>

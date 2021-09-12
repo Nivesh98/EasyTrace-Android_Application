@@ -3,6 +3,8 @@ package com.nivacreation.login;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -10,9 +12,17 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,15 +32,24 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.jetbrains.annotations.NotNull;
 
 public class Passenger_Navigation extends AppCompatActivity {
 
+   // private ImageView userImage;
+    private Uri imageUri;
+    private Bitmap compressor;
+    ImageView userImage;
+
+
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userId;
     String vui;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +70,12 @@ public class Passenger_Navigation extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        userImage = (ImageView) headerView.findViewById(R.id.imageProfile);
+
+        userImage();
 
         userDetails();
 
@@ -94,6 +119,53 @@ public class Passenger_Navigation extends AppCompatActivity {
 
                 }
             });
+        }
+    }
+
+    public void userImage(){
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        ImageView userImage = (ImageView) headerView.findViewById(R.id.imageProfile);
+
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                    if (ContextCompat.checkSelfPermission(Passenger_Navigation.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                        Toast.makeText(Passenger_Navigation.this,"Permission Denied", Toast.LENGTH_SHORT).show();
+                        ActivityCompat.requestPermissions(Passenger_Navigation.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                    }else {
+                        Toast.makeText(Passenger_Navigation.this,"Chose Image",Toast.LENGTH_SHORT).show();
+                        ChoseImage();
+                    }
+                }else{
+                    Toast.makeText(Passenger_Navigation.this,"Chose Image",Toast.LENGTH_SHORT).show();
+                    ChoseImage();
+                }
+            }
+        });
+    }
+
+    private void ChoseImage() {
+        Toast.makeText(Passenger_Navigation.this,"Chose Image",Toast.LENGTH_SHORT).show();
+
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1,1).start(Passenger_Navigation.this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode==RESULT_OK){
+                imageUri = result.getUri();
+                userImage.setImageURI(imageUri);
+            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Exception error = result.getError();
+            }
         }
     }
 }

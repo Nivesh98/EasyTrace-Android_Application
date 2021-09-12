@@ -1,9 +1,14 @@
 package com.nivacreation.login;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceActivity;
@@ -11,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,9 +83,12 @@ public class HomeFragment extends Fragment {
         userTypeTxt = view.findViewById(R.id.txtUserType);
         sUserName = view.findViewById(R.id.userName);
 
+       // ImageView userImage = (ImageView) view.findViewById(R.id.imageProfile);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        //userImage();
         userDetails();
 
         qrBtn.setOnClickListener(new View.OnClickListener() {
@@ -123,16 +132,34 @@ public class HomeFragment extends Fragment {
                         vui = value.getString("User Type");
                         userTypeTxt.setText(vui);
 
-//                        String name = value.getString("First Name") + " " + value.getString("Last Name");
-//                        Intent intent = new Intent(getActivity(),layout_header.class);
-//                        intent.putExtra("key",name);
-//                        Toast.makeText(getActivity(),"this is complete"  + name,Toast.LENGTH_LONG).show();
-//                        startActivity(intent);
-
                     }
 
                 }
             });
         }
     }
+//    public void userImage(){
+//
+//        userImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+//                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+//                        Toast.makeText(getActivity(),"Permission Denied", Toast.LENGTH_SHORT).show();
+//                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+//                    }else {
+//                        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
+//                        ChoseImage();
+//                    }
+//                }else{
+//                    Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
+//                    ChoseImage();
+//                }
+//            }
+//        });
+//    }
+//
+//    private void ChoseImage() {
+//        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
+//    }
 }
