@@ -12,7 +12,8 @@
         android:roundIcon="@drawable/bus_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
-        <activity android:name=".Passenger_Navigation"></activity>
+        <activity android:name=".Driver_Navigation"></activity>
+        <activity android:name=".Passenger_Navigation" />
         <activity android:name=".Bus2_Details" />
         <activity android:name=".BusDetails" />
         <activity android:name=".Welcome" />
@@ -21,7 +22,7 @@
         <activity android:name=".Driver" />
         <activity android:name=".qrScanner" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".layout_header"/>
+        <activity android:name=".layout_header" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".splashScreen"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    tools:context=".layout_header">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageProfile_driver"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nivesh"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/viewSupporter_driver"
+        app:layout_constraintBottom_toBottomOf="@+id/imageProfile_driver"
+        app:layout_constraintEnd_toEndOf="@id/imageProfile_driver"
+        app:layout_constraintStart_toStartOf="@id/imageProfile_driver"
+        app:layout_constraintTop_toTopOf="@id/imageProfile_driver"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Nivesh Wanninayaka"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/userName_driver"
+        app:layout_constraintBottom_toTopOf="@id/viewSupporter_driver"
+        app:layout_constraintStart_toEndOf="@id/imageProfile_driver" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/verified"
+        android:textColor="#00ff00"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/imageProfile_driver"
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter_driver" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

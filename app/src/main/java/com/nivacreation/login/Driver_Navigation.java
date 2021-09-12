@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Passenger_Navigation extends AppCompatActivity {
+public class Driver_Navigation extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -35,39 +35,37 @@ public class Passenger_Navigation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_passenger_navigation);
+        setContentView(R.layout.activity_driver_navigation);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        final DrawerLayout drawerLayoutDriver = findViewById(R.id.drawerLayout_driver);
 
-        findViewById(R.id.image_menu).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.image_menu_driver).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
+                drawerLayoutDriver.openDrawer(GravityCompat.START);
             }
         });
 
-        NavigationView navigationView = findViewById(R.id.navigationView);
+        NavigationView navigationView = findViewById(R.id.navigationView_driver);
         navigationView.setItemIconTintList(null);
 
         userDetails();
 
-
-
-        NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
+        NavController navController = Navigation.findNavController(this,R.id.navHostFragment_driver);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        final TextView textTitle = findViewById(R.id.textTitle);
+        final TextView textTitleDriver = findViewById(R.id.textTitle_driver);
+
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull @NotNull NavController controller, @NonNull @NotNull NavDestination destination, @Nullable @org.jetbrains.annotations.Nullable Bundle arguments) {
-                textTitle.setText(destination.getLabel());
+                textTitleDriver.setText(destination.getLabel());
             }
         });
     }
-
     public void userDetails(){
 
         FirebaseUser user = fAuth.getCurrentUser();
@@ -82,13 +80,13 @@ public class Passenger_Navigation extends AppCompatActivity {
 
                     if (value != null && value.exists()) {
 
-                        NavigationView navigationView = findViewById(R.id.navigationView);
+                        NavigationView navigationView = findViewById(R.id.navigationView_driver);
                         navigationView.setItemIconTintList(null);
 
                         View headerView = navigationView.getHeaderView(0);
-                        TextView navUserName = (TextView) headerView.findViewById(R.id.userName);
+                        TextView navUserName = (TextView) headerView.findViewById(R.id.userName_driver);
 
-                       navUserName.setText(value.getString("First Name") + " " + value.getString("Last Name"));
+                        navUserName.setText(value.getString("First Name") + " " + value.getString("Last Name"));
 
                     }
 

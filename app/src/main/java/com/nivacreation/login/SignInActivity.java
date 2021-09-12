@@ -152,7 +152,7 @@ public class SignInActivity extends AppCompatActivity {
                             case "Driver":
                                 //Toast.makeText(SignInActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
                                 //startActivity(new Intent(SignInActivity.this, Driver.class));
-                                Intent goPassengerActivity2 = new Intent(SignInActivity.this, Driver.class);
+                                Intent goPassengerActivity2 = new Intent(SignInActivity.this, Driver_Navigation.class);
                                 goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 goPassengerActivity2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

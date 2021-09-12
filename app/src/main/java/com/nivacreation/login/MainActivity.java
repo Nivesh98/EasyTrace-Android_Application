@@ -143,11 +143,11 @@ public class MainActivity extends AppCompatActivity {
         switch (userType)
         {
             case "Passenger":
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                startActivity(new Intent(MainActivity.this, Passenger_Navigation.class));
                 finish();
                 break;
             case "Driver":
-                startActivity(new Intent(MainActivity.this, Driver.class));
+                startActivity(new Intent(MainActivity.this, Driver_Navigation.class));
                 finish();
                 break;
             case "Admin":
