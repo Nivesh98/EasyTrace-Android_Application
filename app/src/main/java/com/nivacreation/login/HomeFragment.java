@@ -3,6 +3,8 @@ package com.nivacreation.login;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -28,13 +30,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.concurrent.Executor;
 
 public class HomeFragment extends Fragment {
 
+    private static final int RESULT_OK = -1;
     private Button qrBtn, logOut;
     private TextView userFullNameTxt, userEmailTxt, userTypeTxt, sUserName;
+
+    private Uri imageUri;
+    private Bitmap compressor;
+    ImageView userImageP;
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -83,12 +92,14 @@ public class HomeFragment extends Fragment {
         userTypeTxt = view.findViewById(R.id.txtUserType);
         sUserName = view.findViewById(R.id.userName);
 
+        userImageP = view.findViewById(R.id.imageProfile_home);
+
        // ImageView userImage = (ImageView) view.findViewById(R.id.imageProfile);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-        //userImage();
+        userImageMethod();
         userDetails();
 
         qrBtn.setOnClickListener(new View.OnClickListener() {
@@ -137,29 +148,45 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+
     }
-//    public void userImage(){
-//
-//        userImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-//                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-//                        Toast.makeText(getActivity(),"Permission Denied", Toast.LENGTH_SHORT).show();
-//                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-//                    }else {
-//                        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
-//                        ChoseImage();
-//                    }
-//                }else{
-//                    Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
-//                    ChoseImage();
-//                }
-//            }
-//        });
-//    }
-//
-//    private void ChoseImage() {
-//        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
-//    }
+    public void userImageMethod(){
+
+        userImageP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                        Toast.makeText(getActivity(),"Permission Denied", Toast.LENGTH_SHORT).show();
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                    }else {
+                        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
+                        ChoseImage();
+                    }
+                }else{
+                    Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
+                    ChoseImage();
+                }
+            }
+        });
+    }
+
+    private void ChoseImage() {
+        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1,1).start(getActivity());
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode== RESULT_OK){
+                imageUri = result.getUri();
+                userImageP.setImageURI(imageUri);
+            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Exception error = result.getError();
+            }
+        }
+    }
+
 }

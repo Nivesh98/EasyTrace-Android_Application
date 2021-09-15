@@ -26,7 +26,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:id="@+id/imageProfile"
+            android:id="@+id/imageProfile_home"
             android:scaleType="centerCrop"
             android:layout_marginTop="20dp"
             android:src="@drawable/nivesh"
