@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout_driver"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Passenger_Navigation">
+    tools:context=".Driver_Navigation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

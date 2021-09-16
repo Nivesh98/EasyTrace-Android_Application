@@ -2,36 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_home_driver"
         android:icon="@drawable/home"
         android:title="Home"/>
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_profile_driver"
         android:icon="@drawable/user"
         android:title="Profile"/>
 
     <item
-        android:id="@+id/navigation_notification"
+        android:id="@+id/navigation_notification_driver"
         android:icon="@drawable/notification"
         android:title="Notification"/>
 
     <item
-        android:id="@+id/navigation_inbox"
+        android:id="@+id/navigation_inbox_driver"
         android:icon="@drawable/inbox"
         android:title="@string/inbox"/>
     <item
         android:title="@string/others">
         <menu>
             <item
-                android:id="@+id/navigation_settings"
+                android:id="@+id/navigation_settings_driver"
                 android:icon="@drawable/settings"
                 android:title="@string/settings"/>
             <item
-                android:id="@+id/navigation_support"
+                android:id="@+id/navigation_support_driver"
                 android:icon="@drawable/customer"
                 android:title="@string/support"/>
             <item
-                android:id="@+id/navigation_aboutUs"
+                android:id="@+id/navigation_aboutUs_driver"
                 android:icon="@drawable/info"
                 android:title="@string/about_us"/>
         </menu>

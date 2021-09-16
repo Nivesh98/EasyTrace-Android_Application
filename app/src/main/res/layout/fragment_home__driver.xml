@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mask_login"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment_Driver">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,60 +13,59 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/home"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Full name"
             android:id="@+id/txtUserFullName"
-            android:layout_gravity="center"
-            android:layout_marginTop="150dp"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="Full name"
+           />
+
+        <TextView
             android:id="@+id/txtUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginBottom="16dp"
+            android:text="Email"
+             />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Type"
             android:id="@+id/txtUserType"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
-        <Button
-            android:id="@+id/btnFindBus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Find Bus"
-            android:textSize="16sp"
-            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="User Type"
             />
 
-        <Button
-            android:id="@+id/btnQR"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QR Code"
-            android:textSize="16sp"
-            android:layout_marginTop="40dp"
-            />
+            android:text="Driver Activity"
+            android:textSize="40sp"
+          />
         <Button
             android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:text="Log Out"
             android:layout_gravity="center"
             android:id="@+id/logout"
             />
+        <ImageView
+            android:id="@+id/bar_code"
+            android:layout_width="230dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="196dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logout"
+            app:layout_constraintVertical_bias="0.412" />
 
     </LinearLayout>
 

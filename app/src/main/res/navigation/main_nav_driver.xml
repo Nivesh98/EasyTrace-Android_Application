@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/navigation_home_driver"
-        android:name="com.nivacreation.login.HomeFragment"
+        android:name="com.nivacreation.login.HomeFragment_Driver"
         android:label="Home"
         tools:layout="@layout/fragment_home__driver" />
     <fragment
         android:id="@+id/navigation_inbox_driver"
-        android:name="com.nivacreation.login.InboxFragment"
+        android:name="com.nivacreation.login.InboxFragment_Driver"
         android:label="Inbox"
         tools:layout="@layout/fragment_inbox__driver" />
     <fragment
         android:id="@+id/navigation_notification_driver"
-        android:name="com.nivacreation.login.NotificationFragment"
+        android:name="com.nivacreation.login.NotificationFragment_Driver"
         android:label="Notification"
         tools:layout="@layout/fragment_notification__driver" />
     <fragment
         android:id="@+id/navigation_profile_driver"
-        android:name="com.nivacreation.login.ProfileFragment"
+        android:name="com.nivacreation.login.ProfileFragment_Driver"
         android:label="Profile"
         tools:layout="@layout/fragment_profile__driver" />
     <fragment

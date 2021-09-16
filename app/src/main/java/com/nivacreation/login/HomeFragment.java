@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,8 +33,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.Executor;
 
@@ -49,6 +58,7 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore fStore;
     String userId;
     String vui;
+    StorageReference storageReference;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -91,15 +101,23 @@ public class HomeFragment extends Fragment {
         userFullNameTxt = view.findViewById(R.id.txtUserFullName);
         userTypeTxt = view.findViewById(R.id.txtUserType);
         sUserName = view.findViewById(R.id.userName);
-
-        userImageP = view.findViewById(R.id.imageProfile_home);
-
-       // ImageView userImage = (ImageView) view.findViewById(R.id.imageProfile);
-
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
-        userImageMethod();
+        userImageP = view.findViewById(R.id.imageProfile_home);
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        ImageView userImageP = view.findViewById(R.id.imageProfile_home);
+         String userId = fAuth.getCurrentUser().getUid();
+
+        StorageReference profileRef = storageReference.child("user profile").child(userId +".jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(userImageP);
+            }
+        });
+
         userDetails();
 
         qrBtn.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +136,68 @@ public class HomeFragment extends Fragment {
                 startActivity(signInActivity);
             }
         });
+
+            userImageP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                            Toast.makeText(getActivity(),"Permission Denied", Toast.LENGTH_SHORT).show();
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                        }else {
+                            CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1,1).start(getActivity());
+                        }
+                    }else{
+                        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1,1).start(getActivity());
+
+                    }
+                }
+            });
+
+
+
         return view;
 
 
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // ImageView userImageP = getView().findViewById(R.id.imageProfile_home);
+        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode== RESULT_OK){
+                imageUri = result.getUri();
+                userImageP.setImageURI(imageUri);
+                //ImageView userImageP = getView().findViewById(R.id.imageProfile_home);
+
+                StorageReference fileRef = storageReference.child("user profile").child(userId +".jpg");
+                fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Picasso.get().load(uri).into(userImageP);
+                            }
+                        });
+                        Toast.makeText(getActivity(),"Image Uploaded !",Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Toast.makeText(getActivity(),"Failed !",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Exception error = result.getError();
+            }
+        }
     }
 
     public void userDetails(){
@@ -150,43 +227,6 @@ public class HomeFragment extends Fragment {
         }
 
     }
-    public void userImageMethod(){
 
-        userImageP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                        Toast.makeText(getActivity(),"Permission Denied", Toast.LENGTH_SHORT).show();
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-                    }else {
-                        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
-                        ChoseImage();
-                    }
-                }else{
-                    Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
-                    ChoseImage();
-                }
-            }
-        });
-    }
-
-    private void ChoseImage() {
-        Toast.makeText(getActivity(),"Chose Image",Toast.LENGTH_SHORT).show();
-        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setAspectRatio(1,1).start(getActivity());
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode== RESULT_OK){
-                imageUri = result.getUri();
-                userImageP.setImageURI(imageUri);
-            }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Exception error = result.getError();
-            }
-        }
-    }
 
 }

@@ -41,6 +41,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -97,7 +98,15 @@ public class Passenger_Navigation extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
 
-        userImage = (ImageView) headerView.findViewById(R.id.imageProfile);
+        ImageView userImage = (ImageView) headerView.findViewById(R.id.imageProfile);
+
+        StorageReference profileRef = storageReference.child("user profile").child(userId +".jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(userImage);
+            }
+        });
 
         userImage();
 
@@ -255,32 +264,52 @@ public class Passenger_Navigation extends AppCompatActivity {
         if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             progressDialog.setMessage("Storing data...");
-            progressDialog.show();
+
             if (resultCode==RESULT_OK){
                 imageUri = result.getUri();
-                userImage.setImageURI(imageUri);
+                //userImage.setImageURI(imageUri);
+                progressDialog.show();
                 uploadImageToFirebase(imageUri);
+                //progressDialog.dismiss();
             }else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
                 Exception error = result.getError();
+                progressDialog.dismiss();
             }
+            //progressDialog.dismiss();
+        }else{
+            progressDialog.dismiss();
         }
         
 
     }
 
     private void uploadImageToFirebase(Uri imageUri) {
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        ImageView userImage = (ImageView) headerView.findViewById(R.id.imageProfile);
+
         StorageReference fileRef = storageReference.child("user profile").child(userId +".jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 progressDialog.dismiss();
-                Toast.makeText(Passenger_Navigation.this,"Image Uploaded :",Toast.LENGTH_SHORT).show();
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(userImage);
+                    }
+                });
+                Toast.makeText(Passenger_Navigation.this,"Image Uploaded !",Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
                 progressDialog.dismiss();
-                Toast.makeText(Passenger_Navigation.this,"Failed :",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Passenger_Navigation.this,"Failed !",Toast.LENGTH_SHORT).show();
             }
         });
     }
