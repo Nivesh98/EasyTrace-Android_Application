@@ -47,10 +47,12 @@ public class qrScanner extends AppCompatActivity  {
                     public void run() {
                         resultData.setText(result.getText());
                         if (result.getText().equals("87HATPpL1MQ0hhunLRzQkzXQoDt2")){
-                            Intent signInActivity = new Intent(qrScanner.this, BusDetails.class);
-                            signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(signInActivity);
-                            finish();
+                            Intent i = new Intent(qrScanner.this,BusDetailsQR.class);
+                            startActivity(i);
+//                            Intent signInActivity = new Intent(qrScanner.this, BusDetailsQR.class);
+//                            signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(signInActivity);
+//                            finish();
                         }else if (result.getText().equals("0pAVSdvrbtU46n2wt3xvVEAj6Kx1")){
                             Intent signInActivity = new Intent(qrScanner.this, Bus2_Details.class);
                             signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

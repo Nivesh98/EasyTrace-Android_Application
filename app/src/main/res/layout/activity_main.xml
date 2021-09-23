@@ -96,6 +96,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/email"
             android:hint="Email/Contact"
+            android:paddingRight="16dp"
             android:inputType="textEmailAddress"
             android:paddingLeft="60dp" />
 

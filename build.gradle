@@ -5,6 +5,7 @@ buildscript {
         jcenter()
         mavenCentral()
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.2"
         classpath 'com.google.gms:google-services:4.3.10'
@@ -15,6 +16,7 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+
 
 allprojects {
     repositories {

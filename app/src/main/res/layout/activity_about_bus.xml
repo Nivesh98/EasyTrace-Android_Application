@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/mask_login"
+    android:padding="16dp"
+    tools:context=".AboutBus">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Your Bus"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bus_A"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="Bus A"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details" />
+
+        <Button
+            android:id="@+id/bus_B"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="Bus B"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bus_C"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus C"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details" />
+
+        <Button
+            android:id="@+id/bus_D"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus D"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bus_E"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus E"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+        <Button
+            android:id="@+id/bus_F"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus F"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/bus_G"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus G"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+
+        <Button
+            android:id="@+id/bus_H"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus H"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/bus_I"
+            android:layout_width="106dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus I"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+
+        <Button
+            android:id="@+id/bus_J"
+            android:layout_width="108dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Bus J"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="bottom|center"
+            android:background="@drawable/bus_icon_details"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

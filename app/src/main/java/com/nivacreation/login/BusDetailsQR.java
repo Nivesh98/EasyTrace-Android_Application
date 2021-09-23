@@ -25,9 +25,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BusDetails extends AppCompatActivity {
+public class BusDetailsQR extends AppCompatActivity {
 
-    EditText editText,editText1;
+    //EditText editText,editText1;
     Spinner spinner_start, spinner_end;
     Button submit;
     TextView start,end;
@@ -39,11 +39,10 @@ public class BusDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bus_details);
+        setContentView(R.layout.activity_bus_details_qr);
 
-
-        editText = findViewById(R.id.Date);
-        editText1= findViewById(R.id.Time);
+        //editText = findViewById(R.id.Date);
+        //editText1= findViewById(R.id.Time);
         spinner_start = findViewById(R.id.spinner_start);
         spinner_end = findViewById(R.id.spinner_end);
         //start = findViewById(R.id.txt_start);
@@ -63,7 +62,7 @@ public class BusDetails extends AppCompatActivity {
         townList_start.add("Moratuwa");
         townList_start.add("Colombo");
 
-        spinner_start.setAdapter(new ArrayAdapter<>(BusDetails.this, android.R.layout.simple_spinner_dropdown_item,townList_start));
+        spinner_start.setAdapter(new ArrayAdapter<>(BusDetailsQR.this, android.R.layout.simple_spinner_dropdown_item,townList_start));
 
         spinner_start.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -102,7 +101,7 @@ public class BusDetails extends AppCompatActivity {
         townList_end.add("Colombo");
 
 
-        spinner_end.setAdapter(new ArrayAdapter<>(BusDetails.this, android.R.layout.simple_spinner_dropdown_item,townList_end));
+        spinner_end.setAdapter(new ArrayAdapter<>(BusDetailsQR.this, android.R.layout.simple_spinner_dropdown_item,townList_end));
 
         spinner_end.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -135,60 +134,60 @@ public class BusDetails extends AppCompatActivity {
 
 
 
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BusDetails.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-                        month = month + 1;
-                        String date = dayOfMonth + "/" + month + "/" + year;
-                        editText.setText(date);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
-        });
-
-        editText1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                TimePickerDialog timePickerDialog = new TimePickerDialog(BusDetails.this, android.R.style.Theme_Holo_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                        int h = hourOfDay;
-                        int m = minute;
-
-                        String time = hourOfDay + ":" + minute;
-
-                        SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
-                        try {
-                            Date date = f24Hours.parse(time);
-
-                            SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
-                            editText1.setText(f12Hours.format(date));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }, 12, 0, false
-                );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                timePickerDialog.updateTime(hour,min);
-                timePickerDialog.show();
-            }
-        });
+//        editText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(BusDetailsQR.this, new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//
+//                        month = month + 1;
+//                        String date = dayOfMonth + "/" + month + "/" + year;
+//                        editText.setText(date);
+//                    }
+//                }, year, month, day);
+//                datePickerDialog.show();
+//            }
+//        });
+//
+//        editText1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                TimePickerDialog timePickerDialog = new TimePickerDialog(BusDetailsQR.this, android.R.style.Theme_Holo_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//
+//                        int h = hourOfDay;
+//                        int m = minute;
+//
+//                        String time = hourOfDay + ":" + minute;
+//
+//                        SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
+//                        try {
+//                            Date date = f24Hours.parse(time);
+//
+//                            SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
+//                            editText1.setText(f12Hours.format(date));
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                }, 12, 0, false
+//                );
+//                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                timePickerDialog.updateTime(hour,min);
+//                timePickerDialog.show();
+//            }
+//        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(BusDetails.this,AboutBus.class);
+                Intent i = new Intent(BusDetailsQR.this,BusInsideDetailsQR.class);
                 startActivity(i);
             }
         });

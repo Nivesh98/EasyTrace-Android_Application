@@ -4,81 +4,132 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mask_login"
+
     tools:context=".HomeFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/home"
-            android:textSize="20sp"
-            />
+            android:background="@drawable/passenger_home_back_blu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"></ImageView>
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
             android:id="@+id/imageProfile_home"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/nivesh"
+            android:layout_marginRight="5dp"
+            android:layout_width="112dp"
+            android:layout_height="132dp"
             android:clickable="true"
-            app:riv_oval="true"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/samplepic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.946"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.026"
+            app:riv_border_color="#244998"
+            app:riv_border_width="8dp"
+            app:riv_oval="true" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Full name"
             android:id="@+id/txtUserFullName"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
-            android:id="@+id/txtUserEmail"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Type"
-            android:id="@+id/txtUserType"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
-        <Button
-            android:id="@+id/btnFindBus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Find Bus"
+            android:layout_marginTop="132dp"
+            android:text="Full name"
+            android:layout_marginRight="5dp"
+            android:textColor="#133378"
             android:textSize="16sp"
-            android:layout_marginTop="40dp"
-            />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imageProfile_home"
+            app:layout_constraintHorizontal_bias="0.547"
+            app:layout_constraintStart_toStartOf="@+id/imageProfile_home"
+            app:layout_constraintTop_toTopOf="@+id/imageProfile_home" />
+
+        <TextView
+            android:id="@+id/txtUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Email"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28" />
+
+        <TextView
+            android:id="@+id/txtUserType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="User Type"
+            android:textColor="#133378"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtUserFullName"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="@+id/txtUserFullName"
+            app:layout_constraintTop_toBottomOf="@+id/txtUserFullName"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="60dp"
+            android:layout_height="53dp"
+            android:layout_gravity="center"
+            android:background="@drawable/logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.236" />
 
         <Button
             android:id="@+id/btnQR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QR Code"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/passenger_home_scan"
             android:textSize="16sp"
-            android:layout_marginTop="40dp"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.685"
+            app:layout_constraintStart_toEndOf="@+id/btnFindBus"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.914" />
+
         <Button
+            android:id="@+id/btnFindBus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:layout_gravity="center"
-            android:id="@+id/logout"
-            />
+            android:background="@drawable/passenger_home_find"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.137"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.847" />
 
-    </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

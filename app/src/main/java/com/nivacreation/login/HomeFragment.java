@@ -47,7 +47,7 @@ import java.util.concurrent.Executor;
 public class HomeFragment extends Fragment {
 
     private static final int RESULT_OK = -1;
-    private Button qrBtn, logOut;
+    private Button qrBtn, logOut,findBusBtn;
     private TextView userFullNameTxt, userEmailTxt, userTypeTxt, sUserName;
 
     private Uri imageUri;
@@ -96,6 +96,7 @@ public class HomeFragment extends Fragment {
 
         qrBtn = view.findViewById(R.id.btnQR);
         logOut = view.findViewById(R.id.logout);
+        findBusBtn = view.findViewById(R.id.btnFindBus);
 
         userEmailTxt = view.findViewById(R.id.txtUserEmail);
         userFullNameTxt = view.findViewById(R.id.txtUserFullName);
@@ -119,6 +120,16 @@ public class HomeFragment extends Fragment {
         });
 
         userDetails();
+
+        findBusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent signInActivity = new Intent(getActivity(), BusDetails.class);
+//                signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(signInActivity);
+                startActivity(new Intent(getActivity(),BusDetails.class));
+            }
+        });
 
         qrBtn.setOnClickListener(new View.OnClickListener() {
             @Override

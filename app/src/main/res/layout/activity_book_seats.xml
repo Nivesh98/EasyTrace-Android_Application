@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgcolor"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".BookSeats">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book Seats"
+        android:textSize="28dp"
+        android:textColor="#000066"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="71dp"
+            android:src="@drawable/button_red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booked"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="71dp"
+            android:src="@drawable/button_green"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="71dp"
+            android:src="@drawable/button_yellow"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:text="Your Seat"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_1"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_2"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_3"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_4"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_5"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_6"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_7"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_8"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_9"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_10"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_11"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_12"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_13"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_14"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_15"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_16"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_17"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_18"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_19"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_20"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_21"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_22"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_23"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_24"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_25"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_26"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_27"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_28"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_29"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_30"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_31"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_32"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_33"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_34"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_35"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_36"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_37"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_38"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_39"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_40"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_41"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_42"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_43"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_44"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_45"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/seat_46"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_47"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+        <Button
+            android:id="@+id/seat_48"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+
+        <Button
+            android:id="@+id/seat_49"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="70dp"/>
+        <Button
+            android:id="@+id/seat_50"
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+
+</LinearLayout>
