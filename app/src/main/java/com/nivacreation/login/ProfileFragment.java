@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,6 +109,9 @@ public class ProfileFragment extends Fragment {
         swipeButton.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
             public void onStateChange(boolean active) {
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.navHostFragment, new HomeFragment());
+                fragmentTransaction.commit();
 //                Intent signInActivity = new Intent(getActivity(), HomeFragment.class);
 //                signInActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                startActivity(signInActivity);

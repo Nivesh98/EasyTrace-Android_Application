@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 radioButtonUsers = findViewById(checkedId);
-                Toast.makeText(MainActivity.this, radioButtonUsers.getText().toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, radioButtonUsers.getText().toString(),Toast.LENGTH_SHORT).show();
             }
         });
 //        String sPass = txtPass.getText().toString();
@@ -170,53 +170,54 @@ public class MainActivity extends AppCompatActivity {
         String lastName = txtlastName.getText().toString();
         String userType = UserNameRadio;
 
-        if (!firstName.isEmpty())
-        {
-            if(!lastName.isEmpty())
+        if (checkIdRadio == R.id.rdPassenger || checkIdRadio == R.id.rdDriver){
+            if (!firstName.isEmpty())
             {
-                if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                if(!lastName.isEmpty())
                 {
-                    if(!password.isEmpty())
+                    if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches())
                     {
-                        if (!(password.length() < 7))
+                        if(!password.isEmpty())
                         {
-                            if(!comPassword.isEmpty())
+                            if (!(password.length() < 7))
                             {
-                                if (password.equals(comPassword))
+                                if(!comPassword.isEmpty())
                                 {
-                                    progressBar.setVisibility(View.VISIBLE);
-                                    mAuth.createUserWithEmailAndPassword(email,password)
-                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                @Override
-                                                public void onComplete(@NotNull Task<AuthResult> task) {
-                                                    if (task.isSuccessful())
-                                                    {
-                                                        Toast.makeText(MainActivity.this, "Registered Successfully !!", Toast.LENGTH_SHORT).show();
-                                                        userID = mAuth.getCurrentUser().getUid();
-                                                        DocumentReference documentReference = fStore.collection("Users").document(userID);
-                                                        Map<String,Object> user = new HashMap<>();
-                                                        user.put("First Name",firstName);
-                                                        user.put("Last Name",lastName);
-                                                        user.put("email",email);
-                                                        user.put("User Type", userType);
-
-                                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void unused) {
-                                                                Log.d(TAG,"onSuccess: User profile is created for "+ userID);
-                                                            }
-                                                        });
-                                                        // check whether what type of user is
-                                                        userTypeGoActivity(userType);
-                                                        finish();
-                                                    }else
+                                    if (password.equals(comPassword))
+                                    {
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        mAuth.createUserWithEmailAndPassword(email,password)
+                                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NotNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful())
                                                         {
-                                                            Toast.makeText(MainActivity.this, "Registration Error !!!", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(MainActivity.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+                                                            userID = mAuth.getCurrentUser().getUid();
+                                                            DocumentReference documentReference = fStore.collection("Users").document(userID);
+                                                            Map<String,Object> user = new HashMap<>();
+                                                            user.put("First Name",firstName);
+                                                            user.put("Last Name",lastName);
+                                                            user.put("email",email);
+                                                            user.put("User Type", userType);
+
+                                                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    Log.d(TAG,"onSuccess: User profile is created for "+ userID);
+                                                                }
+                                                            });
+                                                            // check whether what type of user is
+                                                            userTypeGoActivity(userType);
+                                                            finish();
+                                                        }else
+                                                        {
+                                                            Toast.makeText(MainActivity.this, "Registration Error!", Toast.LENGTH_SHORT).show();
                                                             progressBar.setVisibility(View.GONE);
                                                         }
 
-                                                }
-                                            });
+                                                    }
+                                                });
 
 //                                    mAuth.createUserWithEmailAndPassword(email,password)
 //                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -232,41 +233,45 @@ public class MainActivity extends AppCompatActivity {
 //                                            Toast.makeText(MainActivity.this, "Registration Error !!!", Toast.LENGTH_SHORT).show();
 //                                        }
 //                                    });
+                                    }else
+                                    {
+                                        txtComPass.setError("Passwords are not matched");
+                                    }
+
                                 }else
                                 {
-                                    txtComPass.setError("Passwords are not matched");
+                                    txtComPass.setError("Empty Fields Are Not Allowed");
                                 }
-
                             }else
-                            {
-                                txtComPass.setError("Empty Fields Are Not Allowed");
-                            }
-                        }else
                             {
                                 txtPass.setError("Passwords length should be >=7 !");
                             }
 
 
+                        }else
+                        {
+                            txtPass.setError("Empty Fields Are Not Allowed");
+                        }
+                    }else if (email.isEmpty())
+                    {
+                        txtEmailSign.setError("Empty Fields Are Not Allowed");
                     }else
                     {
-                        txtPass.setError("Empty Fields Are Not Allowed");
+                        txtEmailSign.setError("Please Enter Correct Email");
                     }
-                }else if (email.isEmpty())
-                {
-                    txtEmailSign.setError("Empty Fields Are Not Allowed");
                 }else
                 {
-                    txtEmailSign.setError("Please Enter Correct Email");
+                    txtlastName.setError("Empty Fields Are Not Allowed");
                 }
-            }else
-            {
-                txtlastName.setError("Empty Fields Are Not Allowed");
-            }
 
-        }else
+            }else
             {
                 txtFirstName.setError("Empty Fields Are Not Allowed");
             }
+
+        }else{
+            Toast.makeText(MainActivity.this, "Please Choose the User !", Toast.LENGTH_SHORT).show();
+        }
 
     }
     private void userDetailsAdd(Task<AuthResult> task) {

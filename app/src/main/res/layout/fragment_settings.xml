@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsFragment">
+    tools:context=".SettingsFragment"
+    android:background="@drawable/passenger_profile_notification">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -11,6 +12,8 @@
         android:layout_height="wrap_content"
         android:text="@string/settings"
         android:layout_gravity="center"
-        android:textSize="20sp"/>
+        android:textSize="30sp"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"/>
 
 </FrameLayout>

@@ -71,7 +71,7 @@ public class SignInActivity extends AppCompatActivity {
                 EditText resetMail = new EditText(v.getContext());
                 AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
                 passwordResetDialog.setTitle("Reset Password");
-                passwordResetDialog.setMessage("Enter Your Email To Received Reset Link");
+                passwordResetDialog.setMessage("Enter Your Email To Receive Reset Link");
                 passwordResetDialog.setView(resetMail);
 
 
@@ -195,10 +195,10 @@ public class SignInActivity extends AppCompatActivity {
                             {
 
                                 findUserType();
-                                Toast.makeText(SignInActivity.this, "Login Successfully !!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignInActivity.this, "Login Successfully !", Toast.LENGTH_SHORT).show();
                             }else
                                 {
-                                    Toast.makeText(SignInActivity.this, "Login Error !!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignInActivity.this, "Login Error !", Toast.LENGTH_SHORT).show();
                                     progressBar.setVisibility(View.GONE);
                                 }
                         }

@@ -4,41 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mask_login"
+
     tools:context=".HomeFragment_Driver">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/driver_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageProfile_home"
+            android:layout_marginRight="5dp"
+            android:layout_width="112dp"
+            android:layout_height="132dp"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/samplepic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.946"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.026"
+            app:riv_border_color="#244998"
+            app:riv_border_width="8dp"
+            app:riv_oval="true" />
 
         <TextView
             android:id="@+id/txtUserFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
             android:text="Full name"
-           />
+            android:textColor="#133378"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txtUserType"
+            app:layout_constraintEnd_toEndOf="@+id/imageProfile_home"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="@+id/imageProfile_home"
+            app:layout_constraintTop_toBottomOf="@+id/imageProfile_home"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txtUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
+            android:visibility="invisible"
             android:text="Email"
-             />
+            app:layout_constraintBottom_toTopOf="@+id/txtUserFullName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtUserType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
             android:text="User Type"
-            />
+            android:textColor="#133378"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageProfile_home"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="@+id/imageProfile_home"
+            app:layout_constraintTop_toBottomOf="@+id/imageProfile_home"
+            app:layout_constraintVertical_bias="0.033" />
 
         <TextView
             android:id="@+id/textView"
@@ -46,27 +91,36 @@
             android:layout_height="wrap_content"
             android:text="Driver Activity"
             android:textSize="40sp"
-          />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:layout_gravity="center"
             android:id="@+id/logout"
-            />
+            android:layout_width="75dp"
+            android:layout_height="61dp"
+            android:layout_gravity="center"
+            android:background="@drawable/logout"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView9"
+            app:layout_constraintVertical_bias="0.067" />
+
         <ImageView
             android:id="@+id/bar_code"
             android:layout_width="230dp"
-            android:layout_marginTop="10dp"
             android:layout_height="196dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+            app:layout_constraintEnd_toEndOf="@+id/imageView9"
             app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout"
-            app:layout_constraintVertical_bias="0.412" />
+            app:layout_constraintStart_toStartOf="@+id/imageView9"
+            app:layout_constraintTop_toTopOf="@+id/imageView9"
+            app:layout_constraintVertical_bias="0.774" />
 
-    </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
