@@ -13,7 +13,7 @@
         android:layout_height="70dp"
         android:id="@+id/imageProfile_driver"
         android:scaleType="centerCrop"
-        android:src="@drawable/nivesh"
+        android:src="@drawable/samplepic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true"/>
