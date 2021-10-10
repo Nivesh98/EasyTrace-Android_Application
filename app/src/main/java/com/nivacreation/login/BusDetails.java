@@ -53,15 +53,15 @@ public class BusDetails extends AppCompatActivity {
         ArrayList<String> townList_start = new ArrayList<>();
 
         townList_start.add("Select Start Location");
-        townList_start.add("Matara");
-        townList_start.add("Weligama");
-        townList_start.add("Galle");
-        townList_start.add("Hikkaduw");
-        townList_start.add("Ambalangoda");
-        townList_start.add("Kaluthara");
-        townList_start.add("Panadura");
-        townList_start.add("Moratuwa");
-        townList_start.add("Colombo");
+        townList_start.add("Kirindiwela");
+        townList_start.add("Radawana");
+        townList_start.add("Henegama");
+        townList_start.add("Waliweriya");
+        townList_start.add("Nadungamuwa");
+        townList_start.add("Miriswaththa");
+        townList_start.add("Mudungoda");
+        townList_start.add("Gampaha");
+
 
         spinner_start.setAdapter(new ArrayAdapter<>(BusDetails.this, android.R.layout.simple_spinner_dropdown_item,townList_start));
 
@@ -91,15 +91,14 @@ public class BusDetails extends AppCompatActivity {
         ArrayList<String> townList_end = new ArrayList<>();
 
         townList_end.add("Select End Location");
-        townList_end.add("Matara");
-        townList_end.add("Weligama");
-        townList_end.add("Galle");
-        townList_end.add("Hikkaduw");
-        townList_end.add("Ambalangoda");
-        townList_end.add("Kaluthara");
-        townList_end.add("Panadura");
-        townList_end.add("Moratuwa");
-        townList_end.add("Colombo");
+        townList_end.add("Kirindiwela");
+        townList_end.add("Radawana");
+        townList_end.add("Henegama");
+        townList_end.add("Waliweriya");
+        townList_end.add("Nadungamuwa");
+        townList_end.add("Miriswaththa");
+        townList_end.add("Mudungoda");
+        townList_end.add("Gampaha");
 
 
         spinner_end.setAdapter(new ArrayAdapter<>(BusDetails.this, android.R.layout.simple_spinner_dropdown_item,townList_end));

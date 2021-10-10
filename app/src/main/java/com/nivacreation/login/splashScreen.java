@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class splashScreen extends AppCompatActivity {
 
@@ -33,12 +36,22 @@ public class splashScreen extends AppCompatActivity {
         logoImg.setAnimation(topAnim);
         textImg.setAnimation(bottomAnim);
 
+        String isShow = PreferenceManager
+                .getDefaultSharedPreferences(this).getString("isShow", "Empty");
+
+        Toast.makeText(this, "iswelcome load "+isShow, Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent goSplash = new Intent(splashScreen.this,Welcome.class);
-                startActivity(goSplash);
-                finish();
+                if(isShow.equals("1")){
+                    Intent goSplash = new Intent(splashScreen.this,SignInActivity.class);
+                    startActivity(goSplash);
+                    finish();
+                }else{
+                    Intent goSplash = new Intent(splashScreen.this,Welcome.class);
+                    startActivity(goSplash);
+                    finish();
+                }
             }
         },SPLASH_SCREEN);
     }

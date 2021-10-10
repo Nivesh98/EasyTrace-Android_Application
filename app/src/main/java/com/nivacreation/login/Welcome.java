@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,9 @@ public class Welcome extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         skipBtn = findViewById(R.id.skipButton);
+
+        PreferenceManager
+                .getDefaultSharedPreferences(this).edit().putString("isShow", "1").apply();
 
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
