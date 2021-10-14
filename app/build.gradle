@@ -28,6 +28,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -95,6 +98,11 @@ dependencies {
 
     //swip button
     implementation 'com.ebanx:swipe-button:0.4.0'
+
+    //map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    //implementation 'com.karumi:dexter:6.2.1'
 
 
 

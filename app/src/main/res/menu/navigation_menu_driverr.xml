@@ -17,8 +17,8 @@
 
     <item
         android:id="@+id/navigation_inbox_driver"
-        android:icon="@drawable/inbox"
-        android:title="@string/inbox"/>
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="Map"/>
     <item
         android:title="@string/others">
         <menu>

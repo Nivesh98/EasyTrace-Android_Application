@@ -8,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class InboxFragment_Driver extends Fragment {
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
+public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
+     GoogleMap mMap;
 
     public InboxFragment_Driver() {
     }
@@ -40,6 +44,21 @@ public class InboxFragment_Driver extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_inbox__driver, container, false);
+        View view = inflater.inflate(R.layout.fragment_inbox__driver, container, false);
+
+         //Obtain the SupportMapFragment and get notified when the map is ready to be used.
+//        getFragmentManager().beginTransaction().add(R.id.framePasssenger,new InboxFragment_Driver()).commit();
+//        SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
+//                .findFragmentById(R.id.mapDriver);
+//        mapFragment.getMapAsync(this);
+        return view;
+    }
+
+    private void getSupportFragmentManager() {
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
     }
 }

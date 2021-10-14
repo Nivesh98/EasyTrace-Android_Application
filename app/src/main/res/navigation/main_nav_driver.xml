@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/navigation_inbox_driver"
         android:name="com.nivacreation.login.InboxFragment_Driver"
-        android:label="Inbox"
+        android:label="Map"
         tools:layout="@layout/fragment_inbox__driver" />
     <fragment
         android:id="@+id/navigation_notification_driver"
