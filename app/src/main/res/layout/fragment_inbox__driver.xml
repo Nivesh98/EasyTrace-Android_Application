@@ -43,25 +43,36 @@
             map:layout_constraintVertical_bias="0.023"
             tools:ignore="NotSibling">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Bus Status :-"
-                android:paddingRight="40dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stop"
+                android:text="Bus Status :- "
                 android:background="@color/white"
                 android:textColor="@color/purple_700"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginRight="20dp"
+                android:textStyle="bold"
+                android:checked="false"
+                android:textOff="off"
+                android:textOn="on"
+                map:showText="true"
+                map:track="@drawable/thumb_track"
+                android:thumb="@drawable/thumb"
+                android:id="@+id/busStatusSwitch"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:id="@+id/busStatusBtn"
+                android:layout_height="36dp"
+                android:text="Run"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:enabled="false"
+                android:textColor="@color/purple_700"
+                android:background="@color/white"
+                />
         </LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
