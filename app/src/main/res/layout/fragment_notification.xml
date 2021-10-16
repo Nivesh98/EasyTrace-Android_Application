@@ -22,7 +22,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="276dp"
+                android:layout_height="212dp"
                 android:background="@drawable/mywallet_passenger"
                 app:layout_constraintBottom_toTopOf="@+id/imageView8" />
 

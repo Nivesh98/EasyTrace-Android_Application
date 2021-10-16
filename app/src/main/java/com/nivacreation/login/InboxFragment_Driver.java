@@ -3,6 +3,7 @@ package com.nivacreation.login;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -28,11 +29,21 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -47,6 +58,13 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
 
     private String mParam1;
     private String mParam2;
+
+    //firebase
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userId;
+    String vui;
+    StorageReference storageReference;
 
     final Handler mHandler = new Handler();
     private Thread mUiThread;
@@ -106,6 +124,12 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
                 .findFragmentById(R.id.mapDriver);
         mapFragment.getMapAsync(this);
 
+        //firebase
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+
         Switch busStatus = (Switch) view.findViewById(R.id.busStatusSwitch);
         Button checkBtn = (Button) view.findViewById(R.id.busStatusBtn);
 
@@ -117,31 +141,8 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
 //                    Toast.makeText(getActivity(),"Now Clickable",Toast.LENGTH_SHORT).show();
 //                }
 //            });
-//            //checkBtn.isClickable() = false;
-//            Toast.makeText(getActivity(),"Bus Stop",Toast.LENGTH_SHORT).show();
-//            // checkBtn.isClickable();
-//        }else if(busStatus.isChecked() == false) {
-//            checkBtn.setText("RUN");
-//            Toast.makeText(getActivity(),"Bus Run",Toast.LENGTH_SHORT).show();
-//            // checkBtn.isClickable();
-//        }
-        checkBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (busStatus.isChecked() == true){
-                    checkBtn.setText("STOP");
-                    checkBtn.isEnabled();
-                    //checkBtn.isClickable() = false;
-                    Toast.makeText(getActivity(),"Bus Stop",Toast.LENGTH_SHORT).show();
-                   // checkBtn.isClickable();
-                }else if (busStatus.isChecked() == false) {
-                    checkBtn.setText("RUN");
 
-                    Toast.makeText(getActivity(),"Bus Run",Toast.LENGTH_SHORT).show();
-                    // checkBtn.isClickable();
-                }
-            }
-        });
+
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -202,35 +203,54 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
 //                for (MarkerOptions mark : markerOptions){
 //                    mMap.addMarker(mark);
 //                }
-                enableMyLocation();
+
                 getLocationPermission();
                 updateLocationUI();
                 //TaskRunInCycle();
-                scheduler = Executors.newSingleThreadScheduledExecutor();
-                scheduler.scheduleAtFixedRate(new Runnable()
-                {
-                    public void run()
-                    {
-                        if(isrun){
-                            runOnUiThread(new Runnable(){
-                                @Override
-                                public void run(){
-                                    getDeviceLocation();
+                checkBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (busStatus.isChecked() == true){
+                            checkBtn.setText("STOP");
 
-                                    Toast.makeText(getActivity(), "change location",Toast.LENGTH_SHORT).show();
-                                    mMap.clear();
-                                    for (MarkerOptions mark : markerOptions){
-                                        mMap.addMarker(mark);
+                            //checkBtn.isClickable() = false;
+                            Toast.makeText(getActivity(),"Bus Started!",Toast.LENGTH_SHORT).show();
+                            // checkBtn.isClickable();
+                            scheduler = Executors.newSingleThreadScheduledExecutor();
+                            scheduler.scheduleAtFixedRate(new Runnable()
+                            {
+                                public void run()
+                                {
+                                    if(isrun){
+                                        runOnUiThread(new Runnable(){
+                                            @Override
+                                            public void run(){
+                                                getDeviceLocation();
+                                                enableMyLocation();
+                                                Toast.makeText(getActivity(), "change location",Toast.LENGTH_SHORT).show();
+                                                mMap.clear();
+                                                for (MarkerOptions mark : markerOptions){
+                                                    mMap.addMarker(mark);
+                                                }
+                                            }
+                                        });
+                                    }else{
+                                        isrun = true;
                                     }
+
                                 }
-                            });
-                        }else{
-                            isrun = true;
+                            }, 0, 30, TimeUnit.SECONDS);
+                        }else if (busStatus.isChecked() == false) {
+                            checkBtn.setText("RUN");
+                            mMap.clear();
+                            for (MarkerOptions mark : markerOptions){
+                                mMap.addMarker(mark);
+                            }
+                            Toast.makeText(getActivity(),"Bus Stopped!",Toast.LENGTH_SHORT).show();
+                            // checkBtn.isClickable();
                         }
-
                     }
-                }, 0, 30, TimeUnit.SECONDS);
-
+                });
                 // [END_EXCLUDE]
 
                 // Turn on the My Location layer and the related control on the map.
@@ -269,6 +289,7 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
          */
+
         try {
             if (locationPermissionGranted) {
                 Task<Location> locationResult = fusedLocationProviderClient.getLastLocation();
@@ -287,6 +308,22 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
                                 mMap.addMarker(new
                                         MarkerOptions().position(currentlocation).title("current location"));
                                 Toast.makeText(getActivity(), "latitude:" + lastKnownLocation.getLatitude() + " longitude:" +lastKnownLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                                drawCircle(new LatLng(lastKnownLocation.getLatitude(),lastKnownLocation.getLongitude()),2);
+                                Toast.makeText(getActivity(), "circle is here", Toast.LENGTH_SHORT).show();
+                                String userID ;
+                                userID = fAuth.getCurrentUser().getUid();
+                                DocumentReference documentReference = fStore.collection("BusLocations").document(userID);
+                                Map<String,Object> user = new HashMap<>();
+                                user.put("lat",lastKnownLocation.getLatitude());
+                                user.put("log",lastKnownLocation.getLongitude());
+                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG,"onSuccess: Success Updated LatLong! "+ userID);
+                                    }
+                                });
+                                Toast.makeText(getActivity(), "Success Updated LatLong!", Toast.LENGTH_SHORT).show();
+
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
@@ -350,5 +387,22 @@ public class InboxFragment_Driver extends Fragment implements OnMapReadyCallback
         } else {
             action.run();
         }
+    }
+    private void drawCircle(LatLng point, double radius_km){
+        CircleOptions circleOptions = new CircleOptions();
+        //Set center of circle
+        circleOptions.center(point);
+        //Set radius of circle
+        circleOptions.radius(radius_km * 1000);
+        //Set border color of circle
+        circleOptions.strokeColor(Color.BLUE);
+        //Set border width of circle
+        circleOptions.strokeWidth(2);
+        circleOptions.fillColor(Color.argb(75,94,165,197));
+        //Adding circle to map
+        Circle mapCircle = mMap.addCircle(circleOptions);
+        //We can remove above circle with code bellow
+        //mapCircle.remove();
+
     }
 }

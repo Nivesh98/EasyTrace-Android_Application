@@ -1,9 +1,11 @@
 package com.nivacreation.login;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,16 +17,38 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.nivacreation.login.databinding.ActivityPassengerFindMapBinding;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class PassengerFindMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityPassengerFindMapBinding binding;
+
+    private ScheduledExecutorService scheduler;
+    private boolean isrun = false;
+    final Handler mHandler = new Handler();
+    private Thread mUiThread;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userId;
+    Double lat;
+    Double log;
 
     Spinner spinner_start, spinner_end;
     Button submit;
@@ -40,6 +64,9 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         //selectLocation();
     }
@@ -213,12 +240,13 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getDriverLocation();
                 String stLo = spinner_start.getSelectedItem().toString();
                 String enLo = spinner_end.getSelectedItem().toString();
                 if(!stLo.isEmpty()){
                     if(!enLo.isEmpty()){
                         mMap.clear();
-                        if(stLo.equals("Kirindiwela") && enLo.equals("Radawana")){
+                        if((stLo.equals("Kirindiwela") && enLo.equals("Radawana"))||(stLo.equals("Radawana") && enLo.equals("Kirindiwela"))){
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
                             double raLat = 7.0312;
@@ -236,7 +264,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat,comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,13));
 
-                        }else if(stLo.equals("Kirindiwela") && enLo.equals("Henegama")){
+                        }else if((stLo.equals("Kirindiwela") && enLo.equals("Henegama"))||(stLo.equals("Henegama") && enLo.equals("Kirindiwela"))){
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
                             double heLat = 7.02166;
@@ -254,7 +282,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat,comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
 
-                        }else if (stLo.equals("Kirindiwela") && enLo.equals("Waliweriya")){
+                        }else if ((stLo.equals("Kirindiwela") && enLo.equals("Waliweriya"))||(stLo.equals("Waliweriya") && enLo.equals("Kirindiwela"))){
 
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
@@ -273,7 +301,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat,comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
 
-                        }else if (stLo.equals("Kirindiwela") && enLo.equals("Nadungamuwa")){
+                        }else if ((stLo.equals("Kirindiwela") && enLo.equals("Nadungamuwa"))||(stLo.equals("Nadungamuwa") && enLo.equals("Kirindiwela"))){
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
                             double naLat = 7.05312;
@@ -291,7 +319,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat,comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,11));
 
-                        }else if (stLo.equals("Kirindiwela") && enLo.equals("Mudungoda")){
+                        }else if ((stLo.equals("Kirindiwela") && enLo.equals("Mudungoda"))||(stLo.equals("Mudungoda") && enLo.equals("Kirindiwela"))){
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
                             double muLat = 7.05312;
@@ -309,7 +337,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat,comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,11));
 
-                        }else if (stLo.equals("Kirindiwela") && enLo.equals("Miriswaththa")) {
+                        }else if ((stLo.equals("Kirindiwela") && enLo.equals("Miriswaththa"))||(stLo.equals("Miriswaththa") && enLo.equals("Kirindiwela"))) {
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
                             double miLat = 7.07339;
@@ -327,7 +355,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 11));
 
-                        }else if (stLo.equals("Kirindiwela") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Kirindiwela") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Kirindiwela"))) {
                             double kiLat = 7.0427287;
                             double kiLong = 80.1300031;
                             double gaLat = 7.09199;
@@ -345,7 +373,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 11));
 
-                        }else if (stLo.equals("Radawana") && enLo.equals("Henegama")) {
+                        }else if ((stLo.equals("Radawana") && enLo.equals("Henegama"))||(stLo.equals("Henegama") && enLo.equals("Radawana"))) {
                             double raLat = 7.0312;
                             double raLong = 80.1045;
                             double heLat = 7.02166;
@@ -363,7 +391,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Radawana") && enLo.equals("Waliweriya")) {
+                        }else if ((stLo.equals("Radawana") && enLo.equals("Waliweriya"))||(stLo.equals("Waliweriya") && enLo.equals("Radawana"))) {
                             double raLat = 7.0312;
                             double raLong = 80.1045;
                             double waLat = 7.03150;
@@ -381,7 +409,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Radawana") && enLo.equals("Nadungamuwa")) {
+                        }else if ((stLo.equals("Radawana") && enLo.equals("Nadungamuwa"))||(stLo.equals("Nadungamuwa") && enLo.equals("Radawana"))) {
                             double raLat = 7.0312;
                             double raLong = 80.1045;
                             double naLat = 7.05312;
@@ -399,7 +427,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Radawana") && enLo.equals("Mudungoda")) {
+                        }else if ((stLo.equals("Radawana") && enLo.equals("Mudungoda"))||(stLo.equals("Mudungoda") && enLo.equals("Radawana"))) {
                             double raLat = 7.0312;
                             double raLong = 80.1045;
                             double muLat = 7.06615;
@@ -417,7 +445,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Radawana") && enLo.equals("Miriswaththa")) {
+                        }else if ((stLo.equals("Radawana") && enLo.equals("Miriswaththa"))||(stLo.equals("Miriswaththa") && enLo.equals("Radawana"))) {
                             double raLat = 7.0312;
                             double raLong = 80.1045;
                             double miLat = 7.07339;
@@ -435,7 +463,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 11));
 
-                        }else if (stLo.equals("Radawana") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Radawana") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Radawana"))) {
                             double raLat = 7.0312;
                             double raLong = 80.1045;
                             double gaLat = 7.09199;
@@ -453,7 +481,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 11));
 
-                        }else if (stLo.equals("Henegama") && enLo.equals("Waliweriya")) {
+                        }else if ((stLo.equals("Henegama") && enLo.equals("Waliweriya"))||(stLo.equals("Waliweriya") && enLo.equals("Henegama"))) {
                             double heLat = 7.02166;
                             double heLong = 80.05446;
                             double waLat = 7.03150;
@@ -471,7 +499,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Henegama") && enLo.equals("Nadungamuwa")) {
+                        }else if ((stLo.equals("Henegama") && enLo.equals("Nadungamuwa"))||(stLo.equals("Nadungamuwa") && enLo.equals("Henegama"))) {
                             double heLat = 7.02166;
                             double heLong = 80.05446;
                             double naLat = 7.05312;
@@ -489,7 +517,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Henegama") && enLo.equals("Mudungoda")) {
+                        }else if ((stLo.equals("Henegama") && enLo.equals("Mudungoda"))||(stLo.equals("Mudungoda") && enLo.equals("Henegama"))) {
                             double heLat = 7.02166;
                             double heLong = 80.05446;
                             double muLat = 7.06615;
@@ -507,7 +535,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Henegama") && enLo.equals("Miriswaththa")) {
+                        }else if ((stLo.equals("Henegama") && enLo.equals("Miriswaththa"))||(stLo.equals("Miriswaththa") && enLo.equals("Henegama"))) {
                             double heLat = 7.02166;
                             double heLong = 80.05446;
                             double miLat = 7.07339;
@@ -525,7 +553,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Henegama") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Henegama") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Henegama"))) {
                             double heLat = 7.02166;
                             double heLong = 80.05446;
                             double gaLat = 7.09199;
@@ -543,7 +571,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Waliweriya") && enLo.equals("Nadungamuwa")) {
+                        }else if ((stLo.equals("Waliweriya") && enLo.equals("Nadungamuwa"))||(stLo.equals("Nadungamuwa") && enLo.equals("Waliweriya"))) {
                             double waLat = 7.03150;
                             double waLong = 80.02781;
                             double naLat = 7.05312;
@@ -561,7 +589,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Waliweriya") && enLo.equals("Mudungoda")) {
+                        }else if ((stLo.equals("Waliweriya") && enLo.equals("Mudungoda"))||(stLo.equals("Mudungoda") && enLo.equals("Waliweriya"))) {
                             double waLat = 7.03150;
                             double waLong = 80.02781;
                             double muLat = 7.06615;
@@ -579,7 +607,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Waliweriya") && enLo.equals("Miriswaththa")) {
+                        }else if ((stLo.equals("Waliweriya") && enLo.equals("Miriswaththa"))||(stLo.equals("Miriswaththa") && enLo.equals("Waliweriya"))) {
                             double waLat = 7.03150;
                             double waLong = 80.02781;
                             double miLat = 7.07339;
@@ -597,7 +625,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Waliweriya") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Waliweriya") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Waliweriya"))) {
                             double waLat = 7.03150;
                             double waLong = 80.02781;
                             double gaLat = 7.09199;
@@ -615,7 +643,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 
-                        }else if (stLo.equals("Nadungamuwa") && enLo.equals("Mudungoda")) {
+                        }else if ((stLo.equals("Nadungamuwa") && enLo.equals("Mudungoda"))||(stLo.equals("Mudungoda") && enLo.equals("Nadungamuwa"))) {
                             double naLat = 7.05312;
                             double naLong = 80.01614;
                             double muLat = 7.06615;
@@ -633,7 +661,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Nadungamuwa") && enLo.equals("Miriswaththa")) {
+                        }else if ((stLo.equals("Nadungamuwa") && enLo.equals("Miriswaththa"))||(stLo.equals("Miriswaththa") && enLo.equals("Nadungamuwa"))) {
                             double naLat = 7.05312;
                             double naLong = 80.01614;
                             double miLat = 7.07339;
@@ -651,7 +679,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Nadungamuwa") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Nadungamuwa") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Nadungamuwa"))) {
                             double naLat = 7.05312;
                             double naLong = 80.01614;
                             double gaLat = 7.09199;
@@ -669,7 +697,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 14));
 
-                        }else if (stLo.equals("Mudungoda") && enLo.equals("Miriswaththa")) {
+                        }else if ((stLo.equals("Mudungoda") && enLo.equals("Miriswaththa"))||(stLo.equals("Miriswaththa") && enLo.equals("Mudungoda"))) {
                             double muLat = 7.06615;
                             double muLong = 80.01228;
                             double miLat = 7.07339;
@@ -687,7 +715,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-                        }else if (stLo.equals("Mudungoda") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Mudungoda") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Mudungoda"))) {
                             double muLat = 7.06615;
                             double muLong = 80.01228;
                             double gaLat = 7.09199;
@@ -705,7 +733,7 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                             LatLng sydney = new LatLng(comLat, comLong);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 14));
 
-                        }else if (stLo.equals("Miriswaththa") && enLo.equals("Gampaha")) {
+                        }else if ((stLo.equals("Miriswaththa") && enLo.equals("Gampaha"))||(stLo.equals("Gampaha") && enLo.equals("Miriswaththa"))) {
                             double miLat = 7.07339;
                             double miLong = 80.01610;
                             double gaLat = 7.09199;
@@ -733,6 +761,58 @@ public class PassengerFindMap extends FragmentActivity implements OnMapReadyCall
                     //startLocation.setError("Please Select Start Location");
                 }
             }
+
+            private void getDriverLocation() {
+                FirebaseUser user = fAuth.getCurrentUser();
+
+
+                if (fAuth.getCurrentUser().getUid() != null){
+
+                    userId = fAuth.getCurrentUser().getUid();
+
+
+                    DocumentReference documentReference = fStore.collection("BusLocations").document("87HATPpL1MQ0hhunLRzQkzXQoDt2");
+                    documentReference.addSnapshotListener( PassengerFindMap.this, new EventListener<DocumentSnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+
+                            if (value != null && value.exists()) {
+                                lat = value.getDouble("lat");
+                                log = value.getDouble("log");
+
+                                double dLog = Double.valueOf(log);
+                                double dLat = Double.valueOf(lat);
+
+                                scheduler = Executors.newSingleThreadScheduledExecutor();
+                                scheduler.scheduleAtFixedRate(new Runnable()
+                                {
+                                    public void run()
+                                    {
+                                        if(isrun){
+                                            runOnUiThread(new Runnable(){
+                                                @Override
+                                                public void run(){
+                                                    LatLng Gampaha = new LatLng(dLat, dLog);
+                                                    mMap.addMarker(new MarkerOptions().position(Gampaha).title("Bus Location"));
+                                                    Toast.makeText(PassengerFindMap.this,"Changed Bus Location!",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }else{
+                                            isrun = true;
+                                        }
+
+                                    }
+                                }, 0, 30, TimeUnit.SECONDS);
+
+                            }
+
+                        }
+                    });
+                }
+            }
         });
     }
+
+
+
 }
