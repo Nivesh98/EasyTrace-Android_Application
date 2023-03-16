@@ -64,7 +64,7 @@ Developed by using <b>Java, XML, Firebase, Google Maps
 </div>
 
 
-#Fuctions
+#Functions
 
 <div class="image-container">
  <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/1%20(1).png" width="240" height="500">
