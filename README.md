@@ -14,7 +14,7 @@ Click the image below for the demo video
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/4.jpg" width="240" height="500">
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/5.png" width="240" height="500">
     <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/6.png" width="240" height="500">
-    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/7.png" width="240" height="500">
+    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/7.png" width="500" height="240">
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/8.jpg" width="240" height="500">
 </div>
 
