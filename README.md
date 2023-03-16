@@ -1,7 +1,7 @@
 <head><link rel="stylesheet" href="styles.css">
 <style>
    p {
-      font-size: 18px;
+      font-size: 40px;
    }
 </style></head>
 # EasyTrace (This is an android application which is related long distance bus tracking and booking system).
