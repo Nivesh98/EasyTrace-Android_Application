@@ -11,8 +11,8 @@ can track the bus in real-time and be seat reservations
 also. This is a solution for Long distance bus system in Sri Lanka. This is a second year group project. 
 I was doing a software developer role.
    
-Developed by using Java, XML, Firebase, Google Maps
-API</p>
+Developed by using <b>Java, XML, Firebase, Google Maps
+   API</b></p>
 <p align="center" style="font-size: 40px;">UI designs</p>
 
 #Login Screen
