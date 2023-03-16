@@ -7,7 +7,7 @@ Click the image below for the demo video
 <!-- [![This is a Youtube Link](https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png){: width="200" height="150"}](https://youtu.be/wwgFBmV1_Sg) -->
 
 <div align="center">
-<a href="https://youtu.be/wwgFBmV1_Sg"><img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png" width="400" height="325"></a>
+<a href="https://youtu.be/wwgFBmV1_Sg"><img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png" width="450" height="325"></a>
 </div>
 <p align="center">This is an Android application for passengers who
 travel by bus and for bus operators. the passengers
