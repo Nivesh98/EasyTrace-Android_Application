@@ -16,13 +16,13 @@ Developed by using <b>Java, XML, Firebase, Google Maps
 
 <p>
 -Finctional Requirements
-    •	The user shall be able to download the app to the mobile phone. First the user has to register/create an account.  
-    •	The system should store the user’s details.  
-    •	The user shall be able to update / delete the user account.  
-    •	The system must be able to shoe information to user in real time.  
-    •	The system must be able to process the position data received from bus positioning module and calculate the estimated time to   the user.  
-    •	The system must be able to allow user to retrieve information through mobile devices.  
-    •	The system must be able to do mapping with the position data retrieved from bus positioning module and show the bus position in a map view to the user.  
+    *	The user shall be able to download the app to the mobile phone. First the user has to register/create an account.  
+    *	The system should store the user’s details.  
+    *	The user shall be able to update / delete the user account.  
+    *	The system must be able to shoe information to user in real time.  
+    *	The system must be able to process the position data received from bus positioning module and calculate the estimated time to   the user.  
+    *	The system must be able to allow user to retrieve information through mobile devices.  
+    *	The system must be able to do mapping with the position data retrieved from bus positioning module and show the bus position in a map view to the user.  
     •	The passenger should be able to make the payments through the wallet of the system.  
     •	The system should keep track of the transactions done by the user.  
     •	The wallet shall allow the user to make remote payments.  
