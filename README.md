@@ -6,7 +6,7 @@ Click the image below for the demo video
 
 [![This is a Youtube Link](https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png)](https://youtu.be/wwgFBmV1_Sg)
 
-<p align="center">UI designs</p>
+<p>UI designs</p>
 
 <div class="image-container">
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/1%20(1).png" width="240" height="500">
