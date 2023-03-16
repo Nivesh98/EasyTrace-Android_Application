@@ -1,3 +1,4 @@
+<head><link rel="stylesheet" href="styles.css"></head>
 # EasyTrace (This is an android application which is related long distance bus tracking and booking system).
 <p>Youtube link: https://youtu.be/wwgFBmV1_Sg</p>
 
@@ -14,16 +15,4 @@ Click the image below for the demo video
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/5.png">
 </div>
 
-.image-container {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   flex-wrap: wrap;
-   max-width: 1000px;
-   margin: 0 auto;
-}
 
-.image-container img {
-   margin: 10px;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
