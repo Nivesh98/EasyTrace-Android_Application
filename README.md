@@ -15,6 +15,7 @@ Developed by using <b>Java, XML, Firebase, Google Maps
    API</b></p>
 
 -Finctional Requirements
+
     *	The user shall be able to download the app to the mobile phone. First the user has to register/create an account.  
     *	The system should store the user’s details.  
     *	The user shall be able to update / delete the user account.  
