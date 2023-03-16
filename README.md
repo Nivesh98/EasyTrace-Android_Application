@@ -14,7 +14,6 @@ I was doing a software developer role.
 Developed by using <b>Java, XML, Firebase, Google Maps
    API</b></p>
 
-<p>
 -Finctional Requirements
     *	The user shall be able to download the app to the mobile phone. First the user has to register/create an account.  
     *	The system should store the user’s details.  
@@ -31,7 +30,6 @@ Developed by using <b>Java, XML, Firebase, Google Maps
     •	Then passenger must scan the NFC code on the door to enter the bus and direct the passenger to the system through the NFC.  
     •	The system should be real time in order to deduct or increase the balance when the passenger do a transaction.  
 
-</p>
  
 <p align="center" style="font-size: 40px;">UI designs</p>
 
