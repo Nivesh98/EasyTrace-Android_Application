@@ -4,7 +4,7 @@ EasyTrace (This is an android application which is related long distance bus tra
 
 Click the image below for the demo video
 
-[![This is a Youtube Link](https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png)](https://youtu.be/wwgFBmV1_Sg)
+[![This is a Youtube Link](https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png){: width="200" height="150"}](https://youtu.be/wwgFBmV1_Sg)
 <p align="center">This is an Android application for passengers who
 travel by bus and for bus operators. the passengers
 can track the bus in real-time and be seat reservations
