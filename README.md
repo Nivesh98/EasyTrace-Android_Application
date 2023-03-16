@@ -6,7 +6,7 @@ Click the image below for the demo video
 
 [![This is a Youtube Link](https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png)](https://youtu.be/wwgFBmV1_Sg)
 
-#<p align="center" style="font-size: 40px;">UI designs</p>
+<p align="center" style="font-size: 40px;">UI designs</p>
 
 #Login Screen
 <div class="image-container">
