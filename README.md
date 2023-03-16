@@ -5,10 +5,18 @@ EasyTrace (This is an android application which is related long distance bus tra
 Click the image below for the demo video
 
 [![This is a Youtube Link](https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/youtube%20thumbnail.png)](https://youtu.be/wwgFBmV1_Sg)
-
+<p align="center">This is an Android application for passengers who
+travel by bus and for bus operators. the passengers
+can track the bus in real-time and be seat reservations
+also. This is a solution for Long distance bus system in Sri Lanka. This is a second year group project. 
+I was doing a software developer role.
+   
+Developed by using Java, XML, Firebase, Google Maps
+API</p>
 <p align="center" style="font-size: 40px;">UI designs</p>
 
 #Login Screen
+
 <div class="image-container">
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/3.jpg" width="240" height="500">
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/4.jpg" width="240" height="500">
@@ -30,6 +38,7 @@ Click the image below for the demo video
    </div>
    <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/8.jpg" width="240" height="500"> -->
 </div>
+
 
 #Fuctions
 
