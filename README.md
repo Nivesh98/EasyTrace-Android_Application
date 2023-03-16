@@ -9,10 +9,10 @@ Click the image below for the demo video
 <p align="center">UI designs</p>
 
 <div class="image-container">
-   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/1%20(1).png">
-   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/3.jpg">
-   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/4.jpg">
-   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/5.png">
+   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/1%20(1).png" width="50" height="150">
+   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/3.jpg" width="50" height="150">
+   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/4.jpg" width="50" height="150">
+   <img src="https://raw.githubusercontent.com/Nivesh98/EasyTrace/main/Assests/5.png" width="50" height="150">
 </div>
 
 
