@@ -1,4 +1,4 @@
-<head><link rel="stylesheet" href="styles.css"></head>
+<!-- <head><link rel="stylesheet" href="styles.css"></head> -->
 # EasyTrace (This is an android application which is related long distance bus tracking and booking system).
 <p>Youtube link: https://youtu.be/wwgFBmV1_Sg</p>
 
